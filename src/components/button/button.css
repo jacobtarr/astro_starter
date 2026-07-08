@@ -1,0 +1,45 @@
+@reference "@styles/index.css";
+
+@layer base {
+  button,
+  [role="button"] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+
+  .c-button {
+    @apply relative border-0 rounded-lg no-underline inline-flex align-middle items-center font-bold gap-x-3
+    bg-primary text-white py-3 px-6 text-left transition-all;
+
+    &:hover {
+      @apply bg-charcoal-blue;
+    }
+  }
+
+  .c-button--large {
+    @apply py-3 px-6; 
+  }
+
+  .c-button__icon--reverse {
+    @apply transform scale-x-[-1];
+  }
+
+  .c-button--primary {
+    &.c-button--dark {
+      &:hover {
+        @apply text-primary bg-white;
+      }
+    }
+  }
+
+  .c-button--secondary {
+		@apply border-2 border-charcoal-blue bg-transparent text-charcoal-blue;
+		
+		&:hover {
+			@apply text-white bg-charcoal-blue;
+		}
+  }
+
+}

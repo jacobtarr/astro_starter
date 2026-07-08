@@ -1,0 +1,16 @@
+@reference "@styles/index.css";
+
+@layer component {
+  .c-icon {
+    @apply w-6 h-6 flex items-center
+		transition-all;
+
+    svg {
+      @apply w-full h-full;
+    }
+
+    path {
+      @apply transition-all;
+    }
+  }
+}

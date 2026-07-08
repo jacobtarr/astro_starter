@@ -1,0 +1,66 @@
+@source "@blocks/**/*.astro";
+@source "@components/**/*.astro";
+@source "@globals/**/*.astro";
+@source "@patterns/**/*.astro";
+@source "@layouts/**/*.astro";
+@source "@pages/**/*.astro";
+
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* @plugin "@tailwindcss/typography"; */
+
+@utility container {
+  @apply w-full mx-auto px-4 md:px-5;
+  max-width: none;
+
+  @media (min-width: 1140px) {
+    max-width: var(--container-lg);
+  }
+
+  @media (min-width: 1340px) {
+    max-width: var(--container-xl);
+  }
+
+  @media (min-width: 1536px) {
+    max-width: var(--container-2xl);
+  }
+}
+
+body {
+  @apply antialiased text-gray-900;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold leading-[1.15];
+  }
+
+  h1 { @apply lg:leading-[1.2] text-3xl md:text-5xl; }
+  h2 { @apply text-2xl md:text-4xl; }
+  h3 { @apply text-xl md:text-3xl; }
+  h4 { @apply text-lg md:text-2xl; }
+  h5 { @apply text-base md:text-xl; }
+  h6 { @apply text-base md:text-lg; }
+
+  p {
+    @apply font-body;
+  }
+
+  ul, ol {
+    @apply pl-6 mb-4;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply mb-1 pl-1 font-body;
+  }
+}
+

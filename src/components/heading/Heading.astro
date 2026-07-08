@@ -1,0 +1,66 @@
+---
+/*
+  Heading Component
+
+  Props:
+    text: string                               # Heading text (required)
+    tag?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6'|'div'  # HTML tag (default: 'h1')
+    size?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6'       # Visual size (default: matches tag)
+    theme?: 'light' | 'dark'                   # Theme (default: 'light')
+    classes?: string                           # Additional classes
+    attrs?: Record<string, string>             # Additional HTML attributes
+
+  Examples:
+    <Heading text="Arizona Landscapes" />
+
+    <Heading
+      text="Featured Work"
+      tag="h2"
+      size="h1"
+      theme="dark"
+      classes="mb-8"
+      attrs={{ id: 'featured-heading' }}
+    />
+*/
+
+import './heading.css';
+
+interface Props {
+  text: string;
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
+  size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  theme?: 'light' | 'dark';
+  classes?: string;
+  attrs?: Record<string, string>;
+}
+
+const {
+  text,
+  tag = 'h1',
+  size,
+  theme = 'light',
+  classes = '',
+  attrs = {},
+} = Astro.props;
+
+const validSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+const resolvedSize = size ?? (validSizes.includes(tag) ? tag : null);
+const sizeClass = resolvedSize ? `o-heading--${resolvedSize}` : '';
+const themeClass = theme === 'dark' ? 'text-gray-100' : '';
+
+const className = ['o-heading', sizeClass, themeClass, classes]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{text && (
+  <>
+    {tag === 'h1' && <h1 class={className} {...attrs} set:html={text} />}
+    {tag === 'h2' && <h2 class={className} {...attrs} set:html={text} />}
+    {tag === 'h3' && <h3 class={className} {...attrs} set:html={text} />}
+    {tag === 'h4' && <h4 class={className} {...attrs} set:html={text} />}
+    {tag === 'h5' && <h5 class={className} {...attrs} set:html={text} />}
+    {tag === 'h6' && <h6 class={className} {...attrs} set:html={text} />}
+    {tag === 'div' && <div class={className} {...attrs} set:html={text} />}
+  </>
+)}

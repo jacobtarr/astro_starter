@@ -1,0 +1,5 @@
+@reference "@styles/index.css";
+
+.block--spacing {
+  @apply py-12 md:py-20;
+}

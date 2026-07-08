@@ -1,0 +1,50 @@
+---
+/*
+  Figure Component
+
+  Semantic image wrapper with optional caption.
+  Composes the Image component with a figcaption.
+
+  Props:
+    src: ImageMetadata                    # Imported image (required)
+    alt: string                           # Alt text (required)
+    caption?: string                      # Optional caption text
+    classes?: string                      # Additional classes for figure
+
+  Examples:
+    <Figure
+      src={photo}
+      alt="Canyon landscape"
+    />
+
+    <Figure
+      src={photo}
+      alt="Canyon landscape"
+      caption="Grand Staircase-Escalante, Utah"
+      classes="my-8"
+    />
+*/
+
+import './figure.css';
+import Image from '@components/image/Image.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata | string;
+  alt: string;
+  caption?: string;
+  classes?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  classes = '',
+} = Astro.props;
+---
+
+<figure class={`c-figure${classes ? ` ${classes}` : ''}`}>
+  <Image src={src} alt={alt} />
+  {caption && <figcaption class="c-figure__caption">{caption}</figcaption>}
+</figure>

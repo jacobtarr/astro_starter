@@ -1,0 +1,113 @@
+---
+{/*
+  Button Component
+
+  Props:
+    text?: string                          # Button text
+    tag?: 'a' | 'button'                   # HTML tag (default: 'a')
+    variant?: 'primary' | 'secondary'      # Button style (default: 'primary')
+    theme?: 'light' | 'dark'               # Theme (default: 'light')
+    size?: 'default' | 'sm' | 'lg'         # Size (default: 'default')
+    url?: string                           # Link URL (default: '#')
+    target?: string                        # Link target (default: '_self')
+    icon?: string                          # Icon name (optional)
+    iconOrientation?: 'left' | 'right'     # Icon position (default: 'right')
+    iconReverse?: boolean                  # Flip icon (default: false)
+    classes?: string                       # Additional classes
+    attrs?: Record<string, string>         # Additional HTML attributes
+
+  Examples:
+    <Button text="Donate" url="/donate" variant="primary" />
+
+    <Button
+      text="Learn More"
+      url="/about"
+      variant="secondary"
+      icon="arrow"
+      iconOrientation="right"
+    />
+
+    <Button
+      text="Submit"
+      tag="button"
+      variant="primary"
+      attrs={{ type: 'submit' }}
+    />
+*/}
+
+import './button.css';
+import Icon from '@components/icon/Icon.astro';
+
+interface Props {
+  text?: string;
+  tag?: 'a' | 'button';
+  variant?: 'primary' | 'secondary';
+  theme?: 'light' | 'dark';
+  size?: 'default' | 'sm' | 'lg';
+  url?: string;
+  target?: string;
+  icon?: string;
+  iconOrientation?: 'left' | 'right';
+  iconReverse?: boolean;
+  classes?: string;
+  attrs?: Record<string, string>;
+}
+
+const {
+  text,
+  tag = 'a',
+  variant = 'primary',
+  theme = 'light',
+  size = 'default',
+  url = '#',
+  target = '_self',
+  icon,
+  iconOrientation = 'right',
+  iconReverse = false,
+  classes = '',
+  attrs = {},
+} = Astro.props;
+
+const hasIcon = !!icon;
+
+const className = [
+  'c-button',
+  `c-button--${variant}`,
+  `c-button--${theme}`,
+  `c-button--${size}`,
+  hasIcon ? 'has-icon' : '',
+  classes,
+].filter(Boolean).join(' ');
+
+const linkAttrs = tag === 'a' ? { href: url, target } : {};
+---
+
+{tag === 'a' ? (
+  <a class={className} {...linkAttrs} {...attrs}>
+    {hasIcon && iconOrientation === 'left' && (
+      <div class={`c-button__icon c-button__icon--left`}>
+        <Icon name={icon} />
+      </div>
+    )}
+    {text && <span class="c-button__text">{text}</span>}
+    {hasIcon && iconOrientation === 'right' && (
+      <div class={`c-button__icon c-button__icon--right${iconReverse ? ' c-button__icon--reverse' : ''}`}>
+        <Icon name={icon} />
+      </div>
+    )}
+  </a>
+) : (
+  <button class={className} {...attrs}>
+    {hasIcon && iconOrientation === 'left' && (
+      <div class="c-button__icon c-button__icon--left">
+        <Icon name={icon} />
+      </div>
+    )}
+    {text && <span class="c-button__text">{text}</span>}
+    {hasIcon && iconOrientation === 'right' && (
+      <div class={`c-button__icon c-button__icon--right${iconReverse ? ' c-button__icon--reverse' : ''}`}>
+        <Icon name={icon} />
+      </div>
+    )}
+  </button>
+)}

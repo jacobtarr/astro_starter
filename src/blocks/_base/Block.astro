@@ -1,0 +1,64 @@
+---
+/*
+  Base Block Component
+
+  Props:
+    handle?: string                  # Block type handle for BEM class (default: 'custom')
+    useBlockContainer?: boolean      # Wrap content in container (default: false)
+    useBlockSpacing?: boolean        # Add vertical padding (default: false)
+    blockClasses?: string            # Additional classes for block wrapper
+    blockContainerClasses?: string   # Additional classes for block container
+    blockId?: string                 # Optional ID for the block
+
+  Examples:
+    <Block handle="rich-text" useBlockContainer useBlockSpacing>
+      <p>Content here</p>
+    </Block>
+
+    <Block handle="gallery" blockClasses="block--bg-blue">
+      <Gallery />
+    </Block>
+*/
+
+import './block.css';
+
+interface Props {
+  handle?: string;
+  useBlockContainer?: boolean;
+  useBlockSpacing?: boolean;
+  blockClasses?: string;
+  blockContainerClasses?: string;
+  blockId?: string;
+}
+
+const {
+  handle = 'custom',
+  useBlockContainer = false,
+  useBlockSpacing = false,
+  blockClasses = '',
+  blockContainerClasses = '',
+  blockId,
+} = Astro.props;
+
+const className = [
+  'block',
+  `block--${handle}`,
+  useBlockSpacing ? 'block--spacing' : '',
+  blockClasses,
+].filter(Boolean).join(' ');
+
+const containerClassName = [
+  'block__container container mx-auto',
+  blockContainerClasses,
+].filter(Boolean).join(' ');
+---
+
+<div class={className} id={blockId ? `block-${blockId}` : undefined}>
+  {useBlockContainer ? (
+    <div class={containerClassName}>
+      <slot />
+    </div>
+  ) : (
+    <slot />
+  )}
+</div>

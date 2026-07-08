@@ -1,0 +1,83 @@
+---
+/*
+  SplitMedia Block
+
+  A two-column block with content on one side and an image on the other.
+  Supports reversing the layout to put the image first.
+
+  Props:
+    heading?: string                      # Heading text
+    content?: string                      # HTML content for rich text
+    image?: ImageMetadata | string        # Local image or remote URL
+    imageAlt?: string                     # Image alt text (default: '')
+    reverse?: boolean                     # Reverse layout, image first (default: false)
+    useBlockContainer?: boolean           # Wrap in container (default: true)
+    useBlockSpacing?: boolean             # Add vertical spacing (default: true)
+    blockClasses?: string                 # Additional block classes
+
+  Examples:
+    <SplitMedia
+      heading="This is a heading"
+      content="<p>Lorem ipsum...</p>"
+      image="https://images.unsplash.com/..."
+      imageAlt="Canyon landscape"
+    />
+
+    <SplitMedia
+      heading="This is a heading"
+      content="<p>Lorem ipsum...</p>"
+      image="https://images.unsplash.com/..."
+      imageAlt="Canyon landscape"
+      reverse
+    />
+*/
+
+import Block from '@blocks/_base/Block.astro';
+import Image from '@components/image/Image.astro';
+import Heading from '@components/heading/Heading.astro';
+import RichText from '@components/rich-text/RichText.astro';
+
+interface Props {
+  heading?: string;
+  content?: string;
+  image?: ImageMetadata | string;
+  imageAlt?: string;
+  reverse?: boolean;
+  useBlockContainer?: boolean;
+  useBlockSpacing?: boolean;
+  blockClasses?: string;
+}
+
+const {
+  heading,
+  content,
+  image,
+  imageAlt = '',
+  reverse = false,
+  useBlockContainer = true,
+  useBlockSpacing = true,
+  blockClasses = '',
+} = Astro.props;
+
+const contentClass = ['col-span-2 md:col-span-5', reverse ? 'md:col-start-8 md:order-2' : ''].filter(Boolean).join(' ');
+const imageClass = ['col-span-2 md:col-span-6', reverse ? 'md:col-start-1 md:order-1' : 'md:col-start-7'].filter(Boolean).join(' ');
+---
+
+<Block
+  handle="split-media"
+  useBlockContainer={useBlockContainer}
+  useBlockSpacing={useBlockSpacing}
+  blockClasses={blockClasses}
+>
+  <div class="grid grid-cols-2 md:grid-cols-12 gap-8 items-center">
+    <div class={contentClass}>
+      <div class="space-y-4">
+        {heading && <Heading text={heading} tag="h2" />}
+        {content && <RichText content={content} />}
+      </div>
+    </div>
+    <div class={imageClass}>
+      {image && <Image src={image} alt={imageAlt} />}
+    </div>
+  </div>
+</Block>

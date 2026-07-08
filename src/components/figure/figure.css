@@ -1,0 +1,10 @@
+@reference "@styles/index.css";
+
+@layer component {
+	.c-figure {
+	}
+
+	.c-figure__caption {
+		@apply text-gray-500 text-sm mt-2;
+	}
+}

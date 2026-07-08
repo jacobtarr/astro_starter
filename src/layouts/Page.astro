@@ -1,0 +1,59 @@
+---
+/*
+  Layout: Page
+
+  Middle layer between Base and page templates.
+  Handles container, breadcrumbs, and page wrapper.
+
+  Props:
+    useContainer?: boolean            # Wrap content in container (default: true)
+    pageClasses?: string              # Additional classes for .c-page
+    containerClasses?: string         # Additional classes for .c-page__container
+
+  Examples:
+    <Page>
+      content
+    </Page>
+
+    <Page useContainer={false} pageClasses="bg-gray-50">
+      content
+    </Page>
+*/
+
+import Base from './Base.astro';
+import Header from '@globals/header/Header.astro';
+import Footer from '@globals/footer/Footer.astro';
+
+interface Props {
+  bodyClass?: string;
+  useContainer?: boolean;
+  pageClasses?: string;
+  containerClasses?: string;
+}
+
+const {
+  bodyClass,
+  useContainer = false,
+  pageClasses = '',
+  containerClasses = '',
+} = Astro.props;
+
+const pageClassName = ['c-page', pageClasses].filter(Boolean).join(' ');
+const containerClassName = ['c-page__container container mx-auto', containerClasses].filter(Boolean).join(' ');
+---
+
+<Base bodyClass={bodyClass}>
+  <Header />
+  <main class="c-site-container">
+    <div class={pageClassName}>
+      {useContainer ? (
+        <div class={containerClassName}>
+          <slot />
+        </div>
+      ) : (
+        <slot />
+      )}
+    </div>
+  </main>
+  <Footer />
+</Base>

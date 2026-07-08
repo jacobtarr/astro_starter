@@ -1,0 +1,74 @@
+---
+/*
+  Icon Component
+
+  Props:
+    name?: string                         # Icon name e.g. 'arrow' → icon-arrow.svg
+    iconPath?: string                     # OR path to icon e.g. 'portfolio/landscape.svg'
+    tag?: 'span' | 'a' | 'div'            # Wrapper tag (default: 'span')
+    url?: string                          # URL if tag is 'a' (default: '#')
+    target?: string                       # Link target (default: '_self')
+    classes?: string                      # Additional classes
+    attrs?: Record<string, string>        # Additional HTML attributes
+
+  Examples:
+    <Icon name="arrow" />
+
+    <Icon name="close" classes="w-4 h-4" />
+
+    <Icon
+      name="instagram"
+      tag="a"
+      url="https://www.instagram.com/jacobtarr/"
+      target="_blank"
+      attrs={{ rel: 'noopener noreferrer' }}
+    />
+
+    <Icon iconPath="portfolio/genre/landscape.svg" />
+*/
+
+import './icon.css';
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  name?: string;
+  iconPath?: string;
+  tag?: 'span' | 'a' | 'div';
+  url?: string;
+  target?: string;
+  classes?: string;
+  attrs?: Record<string, string>;
+}
+
+const {
+  name,
+  iconPath,
+  tag = 'span',
+  url = '#',
+  target = '_self',
+  classes = '',
+  attrs = {},
+} = Astro.props;
+
+const className = ['c-icon', classes].filter(Boolean).join(' ');
+
+const linkAttrs = tag === 'a' ? { href: url, target } : {};
+
+const resolvedPath = iconPath
+  ? `./src/assets/icons/${iconPath}`
+  : name
+  ? `./src/assets/icons/icon-${name}.svg`
+  : null;
+
+let svgContent = '';
+if (resolvedPath) {
+  try {
+    svgContent = fs.readFileSync(path.resolve(resolvedPath), 'utf-8');
+  } catch (e) {}
+}
+---
+
+{tag === 'a' && <a class={className} {...linkAttrs} {...attrs} set:html={svgContent} />}
+{tag === 'div' && <div class={className} {...attrs} set:html={svgContent} />}
+{tag === 'span' && <span class={className} {...attrs} set:html={svgContent} />}

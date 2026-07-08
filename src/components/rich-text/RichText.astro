@@ -1,0 +1,57 @@
+---
+/*
+  RichText Component
+
+  Props:
+    content: string                               # HTML content (required)
+    variant?: 'default'|'small'|'medium'|'large'  # Size variant (default: 'default')
+    theme?: 'light' | 'dark'                      # Theme (default: 'light')
+    classes?: string                              # Additional classes
+    attrs?: Record<string, string>                # Additional attributes
+
+  Examples:
+    <RichText content={entry.body} />
+
+    <RichText
+      content={entry.body}
+      variant="large"
+      theme="dark"
+      classes="my-8"
+    />
+*/
+
+import './rich-text.css';
+
+interface Props {
+  content: string;
+  variant?: 'default' | 'small' | 'medium' | 'large';
+  theme?: 'light' | 'dark';
+  classes?: string;
+  attrs?: Record<string, string>;
+}
+
+const {
+  content,
+  variant = 'default',
+  theme = 'light',
+  classes = '',
+  attrs = {},
+} = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  small: 'c-rte--small',
+  medium: 'c-rte--medium',
+  large: 'c-rte--large',
+  default: '',
+};
+
+const className = [
+  'c-rte',
+  'font-body',
+  variantClasses[variant] ?? '',
+  theme === 'dark' ? 'text-white' : '',
+  classes,
+].filter(Boolean).join(' ');
+---
+
+{content && <div class={className} {...attrs} set:html={content} />}

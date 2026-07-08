@@ -1,0 +1,55 @@
+---
+/*
+  Head Component
+
+  Handles all meta tags, SEO, and document head concerns.
+  Import your global CSS here so it's included on every page.
+
+  Props:
+    title?: string                        # Page title (default: site title)
+    description?: string                  # Meta description (default: site description)
+    ogImage?: string                      # Open Graph image URL
+
+  Examples:
+    <Head title="About" description="About this site" />
+    <Head />
+*/
+
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource-variable/geist/wght.css';
+import '@styles/index.css';
+import { siteTitle, siteDescription } from '@src/consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = siteTitle,
+  description = siteDescription,
+  ogImage,
+} = Astro.props;
+
+const canonicalURL = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : null;
+---
+
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href={canonicalURL && <link rel="canonical" href={canonicalURL} />} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{ogImage && <meta property="og:image" content={ogImage} />}

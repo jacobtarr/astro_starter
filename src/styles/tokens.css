@@ -1,0 +1,91 @@
+@custom-variant dark (&:where(.u-dark-mode, .u-dark-mode *));
+
+@theme {
+  /* Breakpoints */
+  --breakpoint-3xl: 1600px;
+  --breakpoint-4xl: 1920px;
+
+  /* Container sizes */
+  --container-padding: 1rem;
+  --container-lg: 1140px;
+  --container-xl: 1352px;
+  --container-2xl: 1352px;
+
+	/* Brand Colors */
+	--color-charcoal-blue: #2f3e46;
+	--color-dark-slate: #354f52;
+	--color-deep-teal: #52796f;
+	--color-muted-teal: #84a98c;
+	--color-ash-grey: #cad2c5;
+
+  /* Colors */
+  --color-primary: var(--color-dark-slate);
+	--color-secondary: var(--color-muted-teal);
+	--color-background: var(--color-ash-grey);
+
+  --color-gray-100: #F3F3F3;
+  --color-gray-200: #E0E0E0;
+  --color-gray-300: #B8B8B8;
+  --color-gray-400: #929292;
+  --color-gray-500: #6E6E6E;
+  --color-gray-600: #4B4B4B;
+  --color-gray-700: #313131;
+  --color-gray-800: #272727;
+  --color-gray-900: #1A1A1A;
+
+  /* Spacing */
+  --spacing-0: 0px; /* 0px */
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-7: 1.875rem; /* 30px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-9: 2.25rem; /* 36px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-11: 2.75rem; /* 44px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-13: 3.25rem; /* 52px */
+  --spacing-14: 3.5rem; /* 56px */
+  --spacing-15: 3.75rem; /* 60px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-18: 4.5rem; /* 72px */
+  --spacing-20: 5rem; /* 80px */
+  --spacing-24: 6rem; /* 96px */
+  --spacing-28: 7rem; /* 112px */
+  --spacing-32: 8rem; /* 128px */
+  --spacing-36: 9rem; /* 144px */
+  --spacing-40: 10rem; /* 160px */
+  --spacing-44: 11rem; /* 176px */
+  --spacing-48: 12rem; /* 192px */
+  --spacing-52: 13rem; /* 208px */
+  --spacing-56: 14rem; /* 224px */
+  --spacing-60: 15rem; /* 240px */
+  --spacing-64: 16rem; /* 256px */
+  --spacing-72: 18rem; /* 288px */
+  --spacing-80: 20rem; /* 320px */
+
+  /* Type scale */
+  --text-xxs:  0.625rem; /* 10px */
+  --text-xs:   0.75rem;  /* 12px */
+  --text-sm:   0.875rem; /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg:   1.125rem; /* 18px */
+  --text-xl:   1.25rem;  /* 20px */
+  --text-2xl:  1.5rem;   /* 24px */
+  --text-3xl:  1.75rem;  /* 28px */
+  --text-4xl:  2rem;     /* 32px */
+  --text-5xl:  2.25rem;  /* 36px */
+  --text-6xl:  2.625rem; /* 42px */
+  --text-7xl:  3rem;     /* 48px */
+  --text-8xl:  4rem;     /* 64px */
+  --text-9xl:  6rem;     /* 96px */
+  --text-10xl: 8rem;     /* 128px */
+
+  /* Fonts */
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui;
+  --font-body: 'Geist Variable', ui-sans-serif, system-ui;
+	--font-mono: 'IBM Plex Mono', monospace;
+}

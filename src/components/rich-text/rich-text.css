@@ -1,0 +1,28 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .c-rte, p {
+    @apply leading-normal text-base md:text-lg mt-0 last:mb-0;
+  }
+
+  .c-rte--small, .c-rte--small p {
+    @apply text-sm md:text-base;
+  }
+
+  .c-rte--large, .c-rte--large p {
+    @apply text-lg md:text-xl;
+  }
+
+  .c-rte {
+    @apply space-y-4;
+
+    figure {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    a {
+      @apply underline;
+    }
+  }
+}
