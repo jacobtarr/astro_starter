@@ -1,0 +1,101 @@
+---
+/*
+  MobileNav Pattern
+
+  Hamburger button and mobile navigation drawer.
+  Uses Alpine.js for open/close state via parent header x-data.
+
+  Props:
+    links: { href: string, label: string }[]  # Nav links (required)
+    socialLinks?: { name: string, url: string }[]  # Social icon links
+
+  Examples:
+    <MobileNav links={navLinks} />
+
+    <MobileNav
+      links={navLinks}
+      socialLinks={[
+        { name: 'instagram', url: 'https://instagram.com/jacobtarr' },
+        { name: 'facebook', url: 'https://facebook.com' },
+      ]}
+    />
+*/
+
+import './mobile-nav.css';
+import Eyebrow from '@components/eyebrow/Eyebrow.astro';
+import NavList from '@patterns/nav-list/NavList.astro';
+import IconGroup from '@patterns/icon-group/IconGroup.astro';
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface SocialLink {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  links: NavLink[];
+  socialLinks?: SocialLink[];
+}
+
+const {
+  links = [],
+  socialLinks = [],
+} = Astro.props;
+---
+
+<div class="c-mobile-nav" :class="{ 'is-active': open }">
+  <div class="c-mobile-nav__toggle flex md:hidden">
+    <button
+      @click="open = !open"
+      :class="{ 'is-active': open }"
+      class="hamburger hamburger--squeeze"
+      type="button"
+      aria-label="Main navigation menu"
+      :aria-expanded="open.toString()"
+      aria-controls="mobile-nav"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+  </div>
+  <div
+    id="mobile-nav"
+    x-show="open"
+    x-transition.opacity.duration.150ms
+    class="c-mobile-nav__drawer flex md:hidden"
+    role="navigation"
+    aria-label="Mobile site links"
+  >
+    <div class="c-mobile-nav__inner container space-y-12">
+      <div class="space-y-4">
+        <Eyebrow text="Quick Links" theme="dark" />
+        <NavList
+          links={links}
+          classes="p-nav-list--mobile"
+          linkClasses="text-lg text-gray-100"
+        />
+      </div>
+      {socialLinks.length > 0 && (
+        <div class="c-mobile-nav__footer space-y-6">
+          <Eyebrow text="Social Links" theme="dark" />
+          <IconGroup
+            classes="flex gap-4"
+            icons={socialLinks.map(link => ({
+              name: link.name,
+              tag: 'a',
+              url: link.url,
+              target: '_blank',
+              classes: 'w-8 h-8 text-gray-900',
+              attrs: { rel: 'noopener noreferrer' }
+            }))}
+          />
+        </div>
+      )}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .p-nav-list {
+    @apply flex gap-8 m-0 p-0;
+  }
+
+  .p-nav-list--mobile {
+    @apply flex-col gap-4 p-0;
+  }
+
+  .p-nav-list__item {
+    @apply list-none m-0 p-0;
+  }
+
+  .p-nav-list__link {
+    @apply font-sans font-bold;
+
+    &[aria-current="page"] {
+      @apply text-primary;
+    }
+  }
+}

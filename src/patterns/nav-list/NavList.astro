@@ -1,0 +1,64 @@
+---
+/*
+  Nav List Pattern
+
+  A reusable list of navigation links.
+  Used in both header and footer navigation.
+
+  Props:
+    links: { href: string, label: string, classes?: string }[]  # Nav links (required)
+    classes?: string                                            # Additional classes for ul
+    linkClasses?: string                                        # Additional classes for all links
+
+  Examples:
+    <NavList links={navLinks} />
+
+    <NavList
+      links={navLinks}
+      classes="p-nav-list--mobile"
+      linkClasses="text-xl text-gray-100"
+    />
+*/
+
+import './nav-list.css';
+
+interface NavLink {
+  href: string;
+  label: string;
+  classes?: string;
+}
+
+interface Props {
+  links: NavLink[];
+  classes?: string;
+  linkClasses?: string;
+}
+
+const {
+  links = [],
+  classes = '',
+  linkClasses = '',
+} = Astro.props;
+
+const ulClass = ['p-nav-list', classes].filter(Boolean).join(' ');
+const baseLinkClass = ['p-nav-list__link', linkClasses].filter(Boolean).join(' ');
+
+const isActive = (href: string) => Astro.url.pathname === href;
+---
+
+<ul class={ulClass}>
+  {links.map((link) => {
+    const linkClass = [baseLinkClass, link.classes].filter(Boolean).join(' ');
+    return (
+      <li class="p-nav-list__item">
+        <a
+          href={link.href}
+          class={linkClass}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      </li>
+    );
+  })}
+</ul>

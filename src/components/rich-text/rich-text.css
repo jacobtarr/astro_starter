@@ -16,9 +16,12 @@
   .c-rte {
     @apply space-y-4;
 
+    > *:last-child {
+      @apply mb-0;
+    }
+
     figure {
-      margin-left: 0;
-      margin-right: 0;
+      @apply m-0;
     }
 
     a {

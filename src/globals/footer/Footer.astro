@@ -1,22 +1,96 @@
 ---
+/*
+  Footer Global
+
+  Site footer with logo, nav links, social icons, and newsletter signup.
+
+  Props:
+    none
+*/
+
 import './footer.css';
+import Logo from '@components/logo/Logo.astro';
+import Grid from '@components/grid/Grid.astro';
+import RichText from '@components/rich-text/RichText.astro';
+import Eyebrow from '@components/eyebrow/Eyebrow.astro';
+import NavList from '@patterns/nav-list/NavList.astro';
+import IconGroup from '@patterns/icon-group/IconGroup.astro';
+import { navLinks, socialLinks, siteTitle } from '@src/consts';
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="c-footer-wrapper">
-	<div class="c-footer container">
-		<div class="grid grid-cols-12">
-			<div class="col-span-3">
-				<h2>Logo</h2>
-			</div>
-			<div class="col-span-3">
-				<h4>Footer Section title</h4>
-			</div>
-			<div class="col-span-3">
-				<h4>Footer Section title</h4>
-			</div>
-			<div class="col-span-3">
-				<h4>Footer Section title</h4>
-			</div>
-		</div>
-	</div>
+  <div class="c-footer container">
+    <Grid>
+      <div class="col-span-2 sm:col-span-3">
+        <div class="sm:space-y-12">
+          <div class="space-y-6">
+            <Logo classes="c-logo--footer" />
+            <RichText
+              content="<p>Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.</p>"
+              classes="hidden sm:block text-sm"
+            />
+          </div>
+          <div class="hidden sm:block space-y-5">
+            <Eyebrow text="Follow Me on Social Media" theme="dark" />
+            <IconGroup
+							classes="flex gap-4"
+							icons={socialLinks.map(link => ({
+								name: link.name,
+								tag: 'a',
+								url: link.url,
+								target: '_blank',
+								classes: 'w-8 h-8 text-gray-900',
+								attrs: { rel: 'noopener noreferrer' }
+							}))}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-1 sm:col-start-7 sm:col-span-3">
+        <div class="space-y-4 md:space-y-6">
+          <Eyebrow text="Quick Links" theme="dark" />
+          <NavList
+            links={navLinks}
+            classes="flex-col gap-3 md:gap-5"
+          />
+        </div>
+      </div>
+
+      <div class="col-span-1 block sm:hidden space-y-4">
+        <Eyebrow text="Social Media" />
+        <IconGroup
+          classes="flex gap-4"
+          icons={socialLinks.map(link => ({
+            name: link.name,
+            tag: 'a',
+            url: link.url,
+            target: '_blank',
+            classes: 'w-8 h-8 text-gray-800',
+            attrs: { rel: 'noopener noreferrer' }
+          }))}
+        />
+      </div>
+
+      <div class="col-span-2 sm:col-span-3">
+        <div class="space-y-4 md:space-y-6">
+          <Eyebrow text="Subscribe to the Newsletter" theme="dark" />
+          <RichText
+            content="<p>Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.</p>"
+            classes="text-base"
+          />
+        </div>
+      </div>
+
+    </Grid>
+
+    <div class="c-footer__bottom mt-12 md:mt-20 py-12 border-t border-gray-700">
+      <div class="font-body text-gray-300 text-xs sm:text-sm text-center">
+        &copy; {year} {siteTitle}. All rights reserved.
+      </div>
+    </div>
+
+  </div>
 </footer>

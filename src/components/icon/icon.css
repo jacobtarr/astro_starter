@@ -1,6 +1,6 @@
 @reference "@styles/index.css";
 
-@layer component {
+@layer components {
   .c-icon {
     @apply w-6 h-6 flex items-center
 		transition-all;

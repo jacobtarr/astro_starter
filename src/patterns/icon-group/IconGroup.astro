@@ -1,0 +1,57 @@
+---
+/*
+  IconGroup Pattern
+
+  A group of icons, typically used for social links.
+
+  Props:
+    icons: Icon[]                         # List of icon configs (required)
+    classes?: string                      # Additional classes for wrapper
+
+  Examples:
+    <IconGroup
+      classes="flex gap-4"
+      icons={[
+        { name: 'instagram', tag: 'a', url: 'https://instagram.com/jacobtarr', target: '_blank', attrs: { rel: 'noopener noreferrer' } },
+        { name: 'facebook', tag: 'a', url: 'https://facebook.com', target: '_blank', attrs: { rel: 'noopener noreferrer' } },
+      ]}
+    />
+*/
+
+import './icon-group.css';
+import Icon from '@components/icon/Icon.astro';
+
+interface IconConfig {
+  name: string;
+  tag?: 'span' | 'a' | 'div';
+  url?: string;
+  target?: string;
+  classes?: string;
+  attrs?: Record<string, string>;
+}
+
+interface Props {
+  icons: IconConfig[];
+  classes?: string;
+}
+
+const {
+  icons = [],
+  classes = '',
+} = Astro.props;
+
+const className = ['p-icon-group', classes].filter(Boolean).join(' ');
+---
+
+<div class={className}>
+  {icons.map((icon) => (
+    <Icon
+      name={icon.name}
+      tag={icon.tag}
+      url={icon.url}
+      target={icon.target}
+      classes={icon.classes}
+      attrs={icon.attrs}
+    />
+  ))}
+</div>

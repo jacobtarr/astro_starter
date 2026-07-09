@@ -2,5 +2,5 @@
 
 .c-footer-wrapper {
   @apply text-gray-100 bg-gray-900
-  py-12 md:py-20;
+  pt-12 md:pt-20;
 }

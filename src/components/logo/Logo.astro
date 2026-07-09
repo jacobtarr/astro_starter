@@ -1,0 +1,35 @@
+---
+/*
+  Logo Component
+
+  Site logo with icon and text.
+  Swap SVG icon via Icon component when ready.
+
+  Props:
+    classes?: string                  # Additional classes
+
+  Example:
+    <Logo />
+    <Logo classes="c-logo--dark" />
+*/
+
+import './logo.css';
+import Icon from '@components/icon/Icon.astro';
+
+interface Props {
+  classes?: string;
+}
+
+const { classes = '' } = Astro.props;
+
+const className = ['c-logo', classes].filter(Boolean).join(' ');
+---
+
+<a href="/" class={className}>
+  <div class="c-logo__image">
+    <Icon name="logo" />
+  </div>
+  <p class="c-logo__text">
+    Brand <span class="text-secondary">Name</span>
+  </p>
+</a>

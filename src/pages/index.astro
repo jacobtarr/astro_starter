@@ -24,11 +24,6 @@ const splitMediaDataReversed = {
   content: `
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ut voluptas aliquid.</p>
     <p>Another paragraph here with <strong>bold text</strong> and <em>italic text</em>.</p>
-    <ul>
-      <li>List item one</li>
-      <li>List item two</li>
-      <li>List item three</li>
-    </ul>
   `,
   image: "https://images.unsplash.com/photo-1782605626069-a4007aee78a1?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   imageAlt: "Canyon landscape",
@@ -42,6 +37,7 @@ const splitMediaDataReversed = {
 >
   <SplitMedia {...splitMediaData} />
   <SplitMedia {...splitMediaDataReversed} reverse />
+  <SplitMedia {...splitMediaData} />
   <h3>Headings</h3>
   <Heading text="Heading 1" tag='h1' />
   <Heading text="Heading 2" tag='h2' />

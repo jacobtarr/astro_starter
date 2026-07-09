@@ -34,6 +34,7 @@
 
 import Block from '@blocks/_base/Block.astro';
 import Image from '@components/image/Image.astro';
+import Eyebrow from '@components/eyebrow/Eyebrow.astro';
 import Heading from '@components/heading/Heading.astro';
 import RichText from '@components/rich-text/RichText.astro';
 
@@ -71,8 +72,11 @@ const imageClass = ['col-span-2 md:col-span-6', reverse ? 'md:col-start-1 md:ord
 >
   <div class="grid grid-cols-2 md:grid-cols-12 gap-8 items-center">
     <div class={contentClass}>
-      <div class="space-y-4">
-        {heading && <Heading text={heading} tag="h2" />}
+      <div class="space-y-6">
+        <div class="space-y-4">
+          <Eyebrow text="Featured Work" />
+          {heading && <Heading text={heading} tag="h2" />}
+        </div>
         {content && <RichText content={content} />}
       </div>
     </div>

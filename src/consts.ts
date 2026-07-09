@@ -4,3 +4,16 @@
 export const siteTitle = 'Starter Site';
 export const siteDescription = 'Welcome to my site!';
 export const siteUrl = 'https://example.com';
+
+export const navLinks = [
+  { href: '/',          label: 'Home' },
+  { href: '/about',     label: 'About' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/blog',      label: 'Blog' },
+  { href: '/contact',   label: 'Contact' },
+];
+
+export const socialLinks = [
+  { name: 'instagram', url: 'https://www.instagram.com/jacobtarr/' },
+  { name: 'facebook',  url: 'https://facebook.com' },
+];

@@ -1,0 +1,51 @@
+---
+/*
+  Grid Component
+
+  A layout primitive for creating consistent grid layouts.
+  Uses a 2-column mobile grid that expands to 12 columns on desktop.
+
+  Props:
+    cols?: number                         # Number of desktop columns (default: 12)
+    gap?: number                          # Gap size (default: 8)
+    align?: 'start' | 'center' | 'end'   # Vertical alignment (default: 'start')
+    classes?: string                      # Additional classes
+
+  Examples:
+    <Grid>
+      <div class="col-span-6">Left</div>
+      <div class="col-span-6">Right</div>
+    </Grid>
+
+    <Grid cols={12} gap={8} align="center">
+      <div class="col-span-5">Content</div>
+      <div class="col-span-6 col-start-7">Image</div>
+    </Grid>
+*/
+
+interface Props {
+  cols?: number;
+  gap?: number;
+  align?: 'start' | 'center' | 'end';
+  classes?: string;
+}
+
+const {
+  cols = 12,
+  gap = 8,
+  align = 'start',
+  classes = '',
+} = Astro.props;
+
+const className = [
+  'grid grid-cols-2',
+  `md:grid-cols-${cols}`,
+  `gap-${gap}`,
+  align !== 'start' ? `items-${align}` : '',
+  classes,
+].filter(Boolean).join(' ');
+---
+
+<div class={className}>
+  <slot />
+</div>

@@ -1,0 +1,50 @@
+---
+/*
+  Eyebrow Component
+
+  A small label/eyebrow text component.
+
+  Props:
+    text?: string                         # Eyebrow text
+    theme?: 'light' | 'dark'              # Theme (default: 'light')
+    classes?: string                      # Additional classes
+    attrs?: Record<string, string>        # Additional attributes
+
+  Examples:
+    <Eyebrow text="Featured Work" />
+
+    <Eyebrow
+      text="Featured Work"
+      theme="dark"
+      classes="mb-4"
+    />
+*/
+
+import './eyebrow.css';
+
+interface Props {
+  text?: string;
+  theme?: 'light' | 'dark';
+  classes?: string;
+  attrs?: Record<string, string>;
+}
+
+const {
+  text,
+  theme = 'light',
+  classes = '',
+  attrs = {},
+} = Astro.props;
+
+const className = [
+  'c-eyebrow',
+  theme === 'dark' ? 'text-ash-grey' : '',
+  classes,
+].filter(Boolean).join(' ');
+---
+
+{text && (
+  <div class={className} {...attrs}>
+    <span class="c-eyebrow__text">{text}</span>
+  </div>
+)}

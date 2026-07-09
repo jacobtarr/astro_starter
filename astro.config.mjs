@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 
+import alpinejs from '@astrojs/alpinejs';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -21,4 +23,6 @@ export default defineConfig({
       },
     },
   },
+
+  integrations: [alpinejs({ entrypoint: '/src/scripts/alpine' })],
 });

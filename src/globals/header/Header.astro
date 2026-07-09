@@ -1,5 +1,29 @@
 ---
+/*
+  Header Global
+
+  Site header with logo, primary navigation, and mobile menu.
+
+  Props:
+    none
+*/
+
+import './header.css';
+import Logo from '@components/logo/Logo.astro';
+import NavList from '@patterns/nav-list/NavList.astro';
+import MobileNav from '@globals/mobile-nav/MobileNav.astro';
+
+import { navLinks, socialLinks } from '@src/consts';
 ---
-<h1>
-	This is the header.
-</h1>
+
+<header x-data="headerState" class="c-header">
+  <div class="c-header__inner md:container">
+    <Logo />
+    <nav class="c-nav" aria-label="Primary">
+      <NavList links={navLinks} />
+    </nav>
+    <div class="c-header__right-content">
+      <MobileNav links={navLinks} socialLinks={socialLinks} />
+    </div>
+  </div>
+</header>

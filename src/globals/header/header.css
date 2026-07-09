@@ -1,0 +1,66 @@
+@reference "@styles/index.css";
+@import "@styles/vendor/hamburgers.css";
+
+.c-header {
+  @apply relative z-80 h-[55px] md:h-[63px] w-full bg-transparent;
+
+  &::after {
+    content: '';
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 80;
+    @apply bg-gray-200;
+  }
+}
+
+.c-header__inner {
+  @apply h-full flex items-center justify-between pl-4;
+}
+
+.c-header__right-content {
+  @apply ml-12 h-full relative flex justify-end items-center block
+  md:hidden;
+}
+
+.c-nav {
+  @apply hidden md:flex items-center justify-center h-full md:ml-auto;
+}
+
+/* Hamburger overrides */
+.hamburger {
+  @apply border-l border-solid border-gray-200 p-4;
+  display: flex;
+  align-items: center;
+
+  &:hover,
+  &.is-active {
+    opacity: 1;
+  }
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 30px;
+  height: 2px;
+  border-radius: 0;
+}
+
+.hamburger-inner {
+  margin-top: 0;
+
+  &::before {
+    top: -8px;
+  }
+
+  &::after {
+    bottom: -8px;
+  }
+}
+
+.hamburger-box {
+  height: 20px;
+  width: 30px;
+}

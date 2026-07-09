@@ -7,8 +7,8 @@
 
   Props:
     useContainer?: boolean            # Wrap content in container (default: true)
-    pageClasses?: string              # Additional classes for .c-page
-    containerClasses?: string         # Additional classes for .c-page__container
+    pageClasses?: string              # Additional classes for .l-page
+    containerClasses?: string         # Additional classes for .l-page__container
 
   Examples:
     <Page>
@@ -38,13 +38,13 @@ const {
   containerClasses = '',
 } = Astro.props;
 
-const pageClassName = ['c-page', pageClasses].filter(Boolean).join(' ');
-const containerClassName = ['c-page__container container mx-auto', containerClasses].filter(Boolean).join(' ');
+const pageClassName = ['l-page', pageClasses].filter(Boolean).join(' ');
+const containerClassName = ['l-page__container container mx-auto', containerClasses].filter(Boolean).join(' ');
 ---
 
 <Base bodyClass={bodyClass}>
   <Header />
-  <main class="c-site-container">
+  <main class="l-site-container">
     <div class={pageClassName}>
       {useContainer ? (
         <div class={containerClassName}>
