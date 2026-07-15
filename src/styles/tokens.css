@@ -1,4 +1,4 @@
-@custom-variant dark (&:where(.u-dark-mode, .u-dark-mode *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* Breakpoints */
@@ -11,17 +11,14 @@
   --container-xl: 1352px;
   --container-2xl: 1352px;
 
-	/* Brand Colors */
-	--color-charcoal-blue: #2f3e46;
-	--color-dark-slate: #354f52;
-	--color-deep-teal: #52796f;
-	--color-muted-teal: #84a98c;
-	--color-ash-grey: #cad2c5;
-
   /* Colors */
-  --color-primary: var(--color-dark-slate);
-	--color-secondary: var(--color-muted-teal);
-	--color-background: var(--color-ash-grey);
+  --color-primary:    var(--color-blue-500);  /* actions */
+  --color-text-dark:  var(--color-blue-950);  /* headings */
+  --color-text-body:  var(--color-blue-800);  /* body text */
+  --color-border:     var(--color-blue-400);  /* non-decorative borders */
+  --color-border-decorative: var(--color-blue-200); /* decorative borders */
+  --color-surface-alt: var(--color-blue-50);  /* alternate backgrounds */
+  --color-surface:    #ffffff;                /* main background */
 
   --color-gray-100: #F3F3F3;
   --color-gray-200: #E0E0E0;
@@ -83,6 +80,9 @@
   --text-8xl:  4rem;     /* 64px */
   --text-9xl:  6rem;     /* 96px */
   --text-10xl: 8rem;     /* 128px */
+
+  /* Line heights */
+  --leading-prose: 1.6;
 
   /* Fonts */
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui;

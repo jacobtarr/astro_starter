@@ -4,6 +4,7 @@
 @source "@patterns/**/*.astro";
 @source "@layouts/**/*.astro";
 @source "@pages/**/*.astro";
+@source "@content/**/*.{md,mdx}";
 
 @import "tailwindcss";
 @import "./tokens.css";
@@ -28,39 +29,15 @@
 }
 
 body {
-  @apply antialiased text-gray-900;
+  @apply antialiased text-gray-900 leading-prose;
 }
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold leading-[1.15];
-  }
-
-  h1 { @apply lg:leading-[1.2] text-3xl md:text-5xl; }
-  h2 { @apply text-2xl md:text-4xl; }
-  h3 { @apply text-xl md:text-3xl; }
-  h4 { @apply text-lg md:text-2xl; }
-  h5 { @apply text-base md:text-xl; }
-  h6 { @apply text-base md:text-lg; }
-
   p {
-    @apply font-body;
+    @apply font-body leading-prose;
   }
 
-  ul, ol {
-    @apply pl-6 mb-4;
-  }
-
-  ul {
-    @apply list-disc;
-  }
-
-  ol {
-    @apply list-decimal;
-  }
-
-  li {
-    @apply mb-1 pl-1 font-body;
+  a {
+    @apply hover:text-blue-500 transition-colors;
   }
 }
-

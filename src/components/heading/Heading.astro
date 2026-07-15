@@ -3,12 +3,12 @@
   Heading Component
 
   Props:
-    text: string                               # Heading text (required)
-    tag?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6'|'div'  # HTML tag (default: 'h1')
-    size?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6'       # Visual size (default: matches tag)
-    theme?: 'light' | 'dark'                   # Theme (default: 'light')
-    classes?: string                           # Additional classes
-    attrs?: Record<string, string>             # Additional HTML attributes
+    text: string                                   # Heading text (required)
+    tag?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6'|'a'|'div'  # HTML tag (default: 'h1')
+    size?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6'           # Visual size (default: matches tag)
+    theme?: 'light' | 'dark'                       # Theme (default: 'light')
+    classes?: string                               # Additional classes
+    attrs?: Record<string, string>                 # Additional HTML attributes
 
   Examples:
     <Heading text="Arizona Landscapes" />
@@ -27,7 +27,7 @@ import './heading.css';
 
 interface Props {
   text: string;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'a' | 'div';
   size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   theme?: 'light' | 'dark';
   classes?: string;
@@ -61,6 +61,7 @@ const className = ['c-heading', sizeClass, themeClass, classes]
     {tag === 'h4' && <h4 class={className} {...attrs} set:html={text} />}
     {tag === 'h5' && <h5 class={className} {...attrs} set:html={text} />}
     {tag === 'h6' && <h6 class={className} {...attrs} set:html={text} />}
+    {tag === 'a' && <a class={className} {...attrs} set:html={text} />}
     {tag === 'div' && <div class={className} {...attrs} set:html={text} />}
   </>
 )}

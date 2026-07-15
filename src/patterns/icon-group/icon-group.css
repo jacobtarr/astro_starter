@@ -2,10 +2,10 @@
 
 @layer components {
   .p-icon-group {
-    @apply flex gap-3;
+    @apply flex gap-4;
 
     .c-icon {
-      @apply p-2 bg-deep-teal rounded-full transition-all;
+      @apply p-2 bg-gray-400 rounded-full transition-all;
 
       &:hover {
         @apply scale-125;

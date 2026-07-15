@@ -1,0 +1,85 @@
+---
+/*
+  Pagination Pattern
+
+  Props:
+    currentPage: number                   # Current page number (required)
+    totalPages: number                    # Total number of pages (required)
+    baseUrl: string                       # Base URL for page links e.g. '/blog' (required)
+
+  Examples:
+    <Pagination currentPage={2} totalPages={10} baseUrl="/blog" />
+*/
+
+import './pagination.css';
+import Link from '@components/link/Link.astro';
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props;
+
+const getPageUrl = (page: number) =>
+  page === 1 ? baseUrl : `${baseUrl}/page/${page}`;
+
+const pages: (number | '...')[] = [];
+
+if (totalPages <= 7) {
+  for (let i = 1; i <= totalPages; i++) pages.push(i);
+} else {
+  pages.push(1);
+  if (currentPage > 3) pages.push('...');
+  for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+    pages.push(i);
+  }
+  if (currentPage < totalPages - 2) pages.push('...');
+  pages.push(totalPages);
+}
+---
+
+<nav class="p-pagination h-12 border-t border-gray-200 flex items-center justify-between" aria-label="Pagination">
+	<div class="flex-1 flex h-12 -mt-px">
+		<Link
+			text="Prev"
+			url={currentPage > 1 ? getPageUrl(currentPage - 1) : '#'}
+			icon="arrow-left"
+			iconOrientation="left"
+			classes={`leading-none pt-4 border-t-2 border-transparent hover:border-primary${currentPage === 1 ? ' pointer-events-none opacity-40' : ''}`}
+		/>
+	</div>
+  
+
+  <div class="hidden md:flex gap-1 h-12 -mt-px">
+    {pages.map(page => (
+      page === '...' ? (
+        <span class="p-pagination__ellipsis pt-4 text-gray-400 h-full">…</span>
+      ) : (
+        <a
+          href={getPageUrl(page)}
+          class:list={[
+            'p-pagination__page flex items-baseline pt-[17px] px-4 border-t-2 h-full',
+						page === currentPage
+							? 'border-primary text-primary'
+							: 'border-transparent text-gray-600 hover:border-primary hover:text-primary'
+          ]}
+          aria-current={page === currentPage ? 'page' : undefined}
+        >
+          {page}
+        </a>
+      )
+    ))}
+  </div>
+
+	<div class="flex-1 flex justify-end h-12 -mt-px">
+		<Link
+			text="Next"
+			url={currentPage < totalPages ? getPageUrl(currentPage + 1) : '#'}
+			icon="arrow-right"
+			classes={`leading-none  pt-4 border-t-2 border-transparent hover:border-primary${currentPage === totalPages ? 'pt-4 pointer-events-none' : ''}`}
+		/>
+	</div>
+  
+</nav>

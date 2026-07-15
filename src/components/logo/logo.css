@@ -2,7 +2,7 @@
 
 @layer components {
   .c-logo {
-    @apply relative z-100 no-underline;
+    @apply relative z-100 no-underline inline-flex;
   }
 
   /* Replace with logo if there is any for future sites */

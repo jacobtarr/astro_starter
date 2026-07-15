@@ -1,0 +1,31 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .c-category-tabs {
+    @apply border-b border-gray-200 relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -16px;
+      width: 80px;
+      height: 100%;
+      background: linear-gradient(to right, transparent, white);
+      pointer-events: none;
+    }
+  }
+
+  .c-category-tabs__list {
+    @apply -mr-4 pr-12 md:mr-0 md:pr-0 flex gap-2 md:gap-4 h-full -mb-px overflow-x-auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .c-category-tabs__item {
+    @apply flex items-center;
+  }
+}

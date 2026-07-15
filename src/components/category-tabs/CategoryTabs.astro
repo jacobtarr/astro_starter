@@ -1,0 +1,69 @@
+---
+/*
+  CategoryTabs Component
+
+  A horizontally scrollable tab bar for filtering by category.
+
+  Props:
+    categories: string[]                  # List of category names (required)
+    currentCategory?: string              # Active category slug (default: 'all')
+    baseUrl: string                       # Base URL e.g. '/blog'
+    allLabel?: string                     # Label for all tab (default: 'All blog posts')
+    classes?: string                      # Additional classes
+
+  Examples:
+    <CategoryTabs
+      categories={['Photography', 'Hiking', 'Travel']}
+      currentCategory="all"
+      baseUrl="/blog"
+    />
+*/
+
+import './category-tabs.css';
+
+interface Props {
+  categories: string[];
+  currentCategory?: string;
+  baseUrl: string;
+  allLabel?: string;
+  classes?: string;
+}
+
+const {
+  categories,
+  currentCategory = 'all',
+  baseUrl,
+  allLabel = 'All blog posts',
+  classes = '',
+} = Astro.props;
+
+const getCategoryUrl = (category: string) =>
+  category === 'all' ? baseUrl : `${baseUrl}/category/${category.toLowerCase()}`;
+
+const navClass = ['c-category-tabs', classes].filter(Boolean).join(' ');
+---
+
+<div class={navClass}>
+  <ul class="c-category-tabs__list">
+    {['all', ...categories].map(category => {
+      const isActive = category === currentCategory;
+      const label = category === 'all' ? allLabel : category;
+      return (
+        <li class="c-category-tabs__item">
+          <a
+            href={getCategoryUrl(category)}
+            class:list={[
+              'c-category-tabs__tab whitespace-nowrap border-b-2 py-4 px-6',
+              isActive
+                ? 'border-primary text-primary'
+                : 'border-transparent text-gray-600 hover:border-primary hover:text-primary'
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</div>

@@ -1,0 +1,123 @@
+---
+/*
+  Hero Block
+
+  A two-column hero with content on the left and an image on the right.
+  Supports a primary and secondary button beneath the content.
+
+  Props:
+    eyebrow?: string                      # Eyebrow text above heading
+    heading?: string                      # Heading text
+    content?: string                      # HTML content for rich text
+    image?: ImageMetadata | string        # Local image or remote URL
+    imageAlt?: string                     # Image alt text (default: '')
+    imageCaption?: string                 # Optional image caption
+    primaryButtonText?: string            # Primary button text
+    primaryButtonUrl?: string             # Primary button URL
+    secondaryButtonText?: string          # Secondary button text
+    secondaryButtonUrl?: string           # Secondary button URL
+    useBlockContainer?: boolean           # Wrap in container (default: true)
+    useBlockSpacing?: boolean             # Add vertical spacing (default: true)
+    blockClasses?: string                 # Additional block classes
+
+  Examples:
+    <Hero
+      eyebrow="Welcome"
+      heading="This is a hero heading"
+      image="https://images.unsplash.com/..."
+      imageAlt="Canyon landscape"
+      primaryButtonText="Get started"
+      primaryButtonUrl="/about"
+      secondaryButtonText="Learn more"
+      secondaryButtonUrl="/blog"
+    />
+*/
+
+import Block from '@blocks/_base/Block.astro';
+import Grid from '@components/grid/Grid.astro';
+import Figure from '@components/figure/Figure.astro';
+import Eyebrow from '@components/eyebrow/Eyebrow.astro';
+import Heading from '@components/heading/Heading.astro';
+import RichText from '@components/rich-text/RichText.astro';
+import Button from '@components/button/Button.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  content?: string;
+  image?: ImageMetadata | string;
+  imageAlt?: string;
+  imageCaption?: string;
+  primaryButtonText?: string;
+  primaryButtonUrl?: string;
+  secondaryButtonText?: string;
+  secondaryButtonUrl?: string;
+  useBlockContainer?: boolean;
+  useBlockSpacing?: boolean;
+  blockClasses?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  content,
+  image,
+  imageAlt = '',
+  imageCaption,
+  primaryButtonText,
+  primaryButtonUrl = '#',
+  secondaryButtonText,
+  secondaryButtonUrl = '#',
+  useBlockContainer = true,
+  useBlockSpacing = true,
+  blockClasses = '',
+} = Astro.props;
+
+const contentClass = image ? 'col-span-2 md:col-span-6' : 'col-span-2 md:col-span-12';
+const imageClass = 'col-span-2 md:col-span-6';
+---
+
+<Block
+  handle="hero"
+  useBlockContainer={useBlockContainer}
+  useBlockSpacing={useBlockSpacing}
+  blockClasses={blockClasses}
+>
+  <div class="grid grid-cols-2 md:grid-cols-12 items-center gap-8 lg:gap-20">
+    <div class={contentClass}>
+      <div class="space-y-6">
+        <div class="space-y-3">
+          {eyebrow && <Eyebrow text={eyebrow} />}
+          {heading && <Heading text={heading} tag="h1" />}
+        </div>
+        {content ? (
+          <RichText content={content} variant="large" />
+        ) : Astro.slots.has('default') ? (
+          <RichText variant="large"><slot /></RichText>
+        ) : null}
+        {(primaryButtonText || secondaryButtonText) && (
+          <div class="flex flex-wrap gap-4 md:mt-8">
+            {primaryButtonText &&
+							<Button
+								text={primaryButtonText}
+								url={primaryButtonUrl}
+								variant="primary"
+						/>}
+            {secondaryButtonText &&
+							<Button
+								text={secondaryButtonText}
+								url={secondaryButtonUrl}
+								variant="secondary"
+							/>}
+          </div>
+        )}
+      </div>
+    </div>
+    <div class={imageClass}>
+      {image && (
+        <Figure src={image} alt={imageAlt} caption={imageCaption} />
+      )}
+    </div>
+  </div>
+</Block>

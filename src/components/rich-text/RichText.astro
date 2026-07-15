@@ -3,27 +3,24 @@
   RichText Component
 
   Props:
-    content: string                               # HTML content (required)
+    content?: string                              # HTML content (omit to use the default slot instead)
     variant?: 'default'|'small'|'medium'|'large'  # Size variant (default: 'default')
     theme?: 'light' | 'dark'                      # Theme (default: 'light')
     classes?: string                              # Additional classes
     attrs?: Record<string, string>                # Additional attributes
 
   Examples:
-    <RichText content={entry.body} />
+    <RichText content="<p>Lorem ipsum...</p>" />
 
-    <RichText
-      content={entry.body}
-      variant="large"
-      theme="dark"
-      classes="my-8"
-    />
+    <RichText variant="large" theme="dark" classes="my-8">
+      <Content />
+    </RichText>
 */
 
 import './rich-text.css';
 
 interface Props {
-  content: string;
+  content?: string;
   variant?: 'default' | 'small' | 'medium' | 'large';
   theme?: 'light' | 'dark';
   classes?: string;
@@ -39,19 +36,22 @@ const {
 } = Astro.props;
 
 const variantClasses: Record<string, string> = {
-  small: 'c-rte--small',
-  medium: 'c-rte--medium',
-  large: 'c-rte--large',
+  small: 'c-rich-text--small',
+  medium: 'c-rich-text--medium',
+  large: 'c-rich-text--large',
   default: '',
 };
 
 const className = [
-  'c-rte',
-  'font-body',
+  'c-rich-text',
   variantClasses[variant] ?? '',
-  theme === 'dark' ? 'text-white' : '',
+  theme === 'dark' ? 'c-rich-text--dark' : '',
   classes,
 ].filter(Boolean).join(' ');
 ---
 
-{content && <div class={className} {...attrs} set:html={content} />}
+{content ? (
+  <div class={className} {...attrs} set:html={content} />
+) : Astro.slots.has('default') ? (
+  <div class={className} {...attrs}><slot /></div>
+) : null}

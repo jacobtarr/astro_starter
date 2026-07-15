@@ -2,7 +2,7 @@
 
 @layer components {
   .c-icon {
-    @apply w-6 h-6 flex items-center
+    @apply w-8 h-8 flex items-center
 		transition-all;
 
     svg {

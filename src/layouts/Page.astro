@@ -3,19 +3,18 @@
   Layout: Page
 
   Middle layer between Base and page templates.
-  Handles container, breadcrumbs, and page wrapper.
+  Handles page wrapper and optional container.
 
   Props:
-    useContainer?: boolean            # Wrap content in container (default: true)
-    pageClasses?: string              # Additional classes for .l-page
-    containerClasses?: string         # Additional classes for .l-page__container
+    useContainer?: boolean            # Wrap content in container (default: false)
+    containerClasses?: string         # Additional classes for .l-page-container
 
   Examples:
     <Page>
       content
     </Page>
 
-    <Page useContainer={false} pageClasses="bg-gray-50">
+    <Page useContainer containerClasses="py-16">
       content
     </Page>
 */
@@ -25,27 +24,26 @@ import Header from '@globals/header/Header.astro';
 import Footer from '@globals/footer/Footer.astro';
 
 interface Props {
-  bodyClass?: string;
   useContainer?: boolean;
-  pageClasses?: string;
   containerClasses?: string;
 }
 
+const slug = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'home';
+const bodyClass = `l-body-${slug}`;
+const pageClass = `l-page-container l-page-${slug}`;
+
 const {
-  bodyClass,
   useContainer = false,
-  pageClasses = '',
   containerClasses = '',
 } = Astro.props;
 
-const pageClassName = ['l-page', pageClasses].filter(Boolean).join(' ');
-const containerClassName = ['l-page__container container mx-auto', containerClasses].filter(Boolean).join(' ');
+const containerClassName = ['l-page-container__inner container mx-auto', containerClasses].filter(Boolean).join(' ');
 ---
 
 <Base bodyClass={bodyClass}>
   <Header />
   <main class="l-site-container">
-    <div class={pageClassName}>
+    <div class={pageClass}>
       {useContainer ? (
         <div class={containerClassName}>
           <slot />

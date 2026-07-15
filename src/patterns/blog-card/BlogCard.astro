@@ -1,0 +1,77 @@
+---
+/*
+  BlogCard Pattern
+
+  A card for displaying blog post previews.
+
+  Props:
+    image?: ImageMetadata | string        # Card image
+    imageAlt?: string                     # Image alt text (default: '')
+    category?: string                     # Category label
+    heading?: string                      # Post title
+    href?: string                         # Link to post
+    date?: string                         # Publication date ISO format e.g. "2026-06-24"
+    readTime?: string                     # Read time e.g. "5 min read"
+
+  Examples:
+    <BlogCard
+      image="https://images.unsplash.com/..."
+      imageAlt="Canyon landscape"
+      category="Photography"
+      heading="Canyon at sunset"
+      href="/blog/canyon"
+      date="2026-06-24"
+      readTime="5 min read"
+    />
+*/
+
+import './blog-card.css';
+import Image from '@components/image/Image.astro';
+import Heading from '@components/heading/Heading.astro';
+import Badge from '@components/badge/Badge.astro';
+import PostMeta from '@components/post-meta/PostMeta.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image?: ImageMetadata | string;
+  imageAlt?: string;
+  category?: string;
+  heading?: string;
+  href?: string;
+  date?: string;
+  readTime?: string;
+}
+
+const {
+  image,
+  imageAlt = '',
+  category,
+  heading,
+  href,
+  date,
+  readTime,
+} = Astro.props;
+---
+
+<div class="p-blog-card">
+  {image && (
+    href
+      ? <a href={href} class="p-blog-card__image"><Image src={image} alt={imageAlt} /></a>
+      : <div class="p-blog-card__image"><Image src={image} alt={imageAlt} /></div>
+  )}
+  <div class="p-blog-card__content space-y-8">
+    <div class="space-y-2">
+      {category && <Badge text={category} />}
+      {heading && (
+        <Heading
+          text={heading}
+          size="h5"
+          tag={href ? 'a' : 'h5'}
+          classes="line-clamp-3"
+          attrs={href ? { href } : {}}
+        />
+      )}
+    </div>
+    <PostMeta date={date} readTime={readTime} classes="mt-auto" />
+  </div>
+</div>

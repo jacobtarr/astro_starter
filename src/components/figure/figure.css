@@ -2,6 +2,9 @@
 
 @layer components {
 	.c-figure {
+		img {
+			@apply rounded-2xl shadow-xl;
+		}
 	}
 
 	.c-figure__caption {

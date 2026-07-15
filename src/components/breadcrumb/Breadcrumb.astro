@@ -1,0 +1,75 @@
+---
+/*
+  Breadcrumb Pattern
+
+  A reusable breadcrumb navigation component.
+
+  Props:
+    items: { href?: string, label: string }[]  # Breadcrumb items (required)
+    separator?: string                          # Separator character (default: '›')
+    classes?: string                            # Additional classes for wrapper
+    linkClasses?: string                        # Additional classes for links
+
+  Examples:
+    <Breadcrumb
+      items={[
+        { href: '/', label: 'Home' },
+        { href: '/blog', label: 'Blog' },
+        { label: 'Canyon at sunset' }
+      ]}
+    />
+*/
+
+import './breadcrumb.css';
+
+interface BreadcrumbItem {
+  href?: string;
+  label: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  separator?: string;
+  classes?: string;
+  linkClasses?: string;
+}
+
+const {
+  items = [],
+  separator = '›',
+  classes = '',
+  linkClasses = '',
+} = Astro.props;
+
+const navClass = ['c-breadcrumb', classes].filter(Boolean).join(' ');
+const baseLinkClass = ['c-breadcrumb__link', linkClasses].filter(Boolean).join(' ');
+---
+
+{items.length > 0 && (
+  <nav class={navClass} aria-label="Breadcrumb">
+    <ul class="c-breadcrumb__list">
+      {items.map((item, index) => {
+        const isLast = index === items.length - 1;
+        return (
+          <li class="c-breadcrumb__item">
+            {item.href ? (
+              <a href={item.href} class={baseLinkClass}>
+                {item.label}
+              </a>
+            ) : (
+              <span
+                class="c-breadcrumb__current"
+                aria-current={isLast ? 'page' : undefined}
+              >
+                {item.label}
+              </span>
+            )}
+            {!isLast && (
+              <span class="c-breadcrumb__separator" aria-hidden="true">{separator}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+)}

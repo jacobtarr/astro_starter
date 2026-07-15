@@ -1,0 +1,28 @@
+---
+/*
+  Badge Component
+
+  A small label for categorizing or tagging content.
+
+  Props:
+    text: string                          # Badge text (required)
+    classes?: string                      # Additional classes
+
+  Examples:
+    <Badge text="Blog" />
+    <Badge text="Featured" classes="uppercase tracking-wide" />
+*/
+
+import './badge.css';
+
+interface Props {
+  text: string;
+  classes?: string;
+}
+
+const { text, classes = '' } = Astro.props;
+
+const className = ['c-badge', classes].filter(Boolean).join(' ');
+---
+
+<span class={className}>{text}</span>

@@ -1,0 +1,7 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .c-post-meta {
+    @apply text-sm text-gray-400;
+  }
+}

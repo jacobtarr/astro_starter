@@ -1,31 +1,171 @@
 @reference "@styles/index.css";
 
 @layer components {
-  .c-rte, p {
-    @apply leading-normal text-base md:text-lg mt-0 last:mb-0;
-  }
+  .c-rich-text {
+    --prose-color: var(--color-gray-700);
+    --prose-heading-color: var(--color-gray-900);
+    --prose-strong-color: var(--color-gray-900);
+    --prose-link-color: var(--color-primary);
+    --prose-link-underline-color: var(--color-primary);
+    --prose-marker-color: var(--color-gray-400);
+    --prose-blockquote-border-color: var(--color-primary);
+    --prose-hr-color: var(--color-gray-200);
+    --prose-code-color: var(--color-gray-900);
+    --prose-code-bg: var(--color-gray-100);
+    --prose-pre-bg: var(--color-gray-900);
+    --prose-pre-color: var(--color-gray-100);
 
-  .c-rte--small, .c-rte--small p {
-    @apply text-sm md:text-base;
-  }
+    @apply font-body leading-prose;
+    color: var(--prose-color);
 
-  .c-rte--large, .c-rte--large p {
-    @apply text-lg md:text-xl;
-  }
+    p {
+      @apply mb-4 last:mb-0;
+    }
 
-  .c-rte {
-    @apply space-y-4;
+    h2 {
+      @apply text-3xl lg:text-4xl mt-12 mb-4; /* 48px top, 16px bottom */
+      color: var(--prose-heading-color);
+    }
+
+    h3 {
+      @apply text-2xl lg:text-3xl mt-12 mb-4; /* 48px top, 16px bottom */
+      color: var(--prose-heading-color);
+    }
+
+    h4 {
+      @apply text-xl lg:text-2xl mt-12 mb-4;  /* 48px top, 16px bottom */
+      color: var(--prose-heading-color);
+    }
+
+    h5 {
+      @apply text-lg lg:text-xl mt-12 mb-3;
+      color: var(--prose-heading-color);
+    }
+
+    h6 {
+      @apply text-base lg:text-lg mt-12 mb-3;
+      color: var(--prose-heading-color);
+    }
+
+    ul {
+      @apply list-disc pl-6 mb-4;
+    }
+
+    ol {
+      @apply list-decimal pl-6 mb-4;
+    }
+
+    li {
+      @apply leading-relaxed pl-1 font-body mb-2;
+
+      ul {
+        @apply mt-2 mb-0;
+      }
+
+      ol {
+        @apply mt-2 mb-0;
+      }
+    }
+
+    a {
+      color: var(--prose-link-color);
+      @apply underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--prose-link-underline-color);
+    }
+
+    strong {
+      color: var(--prose-strong-color);
+      @apply font-bold;
+    }
+
+    em {
+      @apply italic;
+    }
+
+    blockquote {
+      @apply italic pl-4 my-8 border-l-4;/* 32px top/bottom */
+      border-color: var(--prose-blockquote-border-color);
+      color: var(--color-gray-600);
+    }
+
+    hr {
+      @apply my-12; /* 48px top/bottom */
+      border-color: var(--prose-hr-color);
+    }
+
+    code {
+      @apply text-sm font-mono px-2 py-1 rounded;
+      color: var(--prose-code-color);
+      background-color: var(--prose-code-bg);
+    }
+
+    pre {
+      @apply rounded-lg p-6 my-8 overflow-x-auto;
+      background-color: var(--prose-pre-bg);
+
+      code {
+        @apply bg-transparent p-0 text-sm;
+        color: var(--prose-pre-color);
+      }
+    }
+
+    figure {
+      @apply m-0 my-8;
+    }
+
+    figcaption {
+      @apply text-sm text-center mt-2;
+      color: var(--color-gray-500);
+    }
+
+    table {
+      @apply w-full my-8 text-sm;
+    }
+
+    th {
+      @apply text-left font-bold pb-2 border-b-2;
+      border-color: var(--color-gray-300);
+      color: var(--prose-heading-color);
+    }
+
+    td {
+      @apply py-2 border-b;
+      border-color: var(--prose-hr-color);
+    }
+
+    img {
+      @apply rounded-lg my-8;
+    }
 
     > *:last-child {
       @apply mb-0;
     }
+  }
 
-    figure {
-      @apply m-0;
+  .c-rich-text--dark {
+    --prose-color: var(--color-gray-200);
+    --prose-heading-color: var(--color-gray-100);
+    --prose-strong-color: var(--color-gray-100);
+    --prose-link-color: var(--color-primary);
+    --prose-marker-color: var(--color-gray-500);
+    --prose-blockquote-border-color: var(--color-primary);
+    --prose-hr-color: var(--color-gray-700);
+    --prose-code-color: var(--color-gray-100);
+    --prose-code-bg: var(--color-gray-800);
+    --prose-pre-bg: var(--color-gray-800);
+    --prose-pre-color: var(--color-gray-200);
+  }
+
+  .c-rich-text--small {
+    p, li {
+      @apply text-sm;
     }
+  }
 
-    a {
-      @apply underline;
+  .c-rich-text--large {
+    p, li {
+      @apply text-base lg:text-lg;
     }
   }
 }

@@ -1,0 +1,12 @@
+---
+title: "Valley reflections: what still water teaches you"
+date: "June 28, 2026"
+excerpt: "A glassy lake at dawn is one of the most honest subjects you can photograph. It does not flatter. It shows you exactly what is there."
+readTime: "3 min read"
+image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2340&auto=format&fit=crop"
+imageAlt: "Valley reflection in still lake"
+category: "Photography"
+draft: false
+---
+
+A glassy lake at dawn is one of the most honest subjects you can photograph.

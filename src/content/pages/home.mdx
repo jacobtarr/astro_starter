@@ -1,0 +1,45 @@
+---
+title: Home
+---
+
+import Hero from '@blocks/hero/Hero.astro';
+import SplitMedia from '@blocks/splitMedia/SplitMedia.astro';
+
+<Hero
+  eyebrow="Welcome"
+  heading="My big fancy <span class='text-primary'>hero headline</span> goes here"
+  image="https://images.unsplash.com/flagged/photo-1565895975045-8f04bc431f89?q=80&w=2144&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  imageAlt="Canyon landscape"
+  primaryButtonText="Get started"
+  primaryButtonUrl="/about"
+  secondaryButtonText="Learn more"
+  secondaryButtonUrl="/blog"
+>
+
+  Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.
+
+</Hero>
+
+<SplitMedia
+	eyebrow="Eyebrow Text"
+  heading="Split Media Block"
+  image="https://images.unsplash.com/photo-1782605626069-a4007aee78a1?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  imageAlt="Canyon landscape"
+  reverse
+>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Another paragraph with **bold text** and *italic text*.
+
+	- Item one
+	- Item two
+	- Item three
+</SplitMedia>
+
+<SplitMedia
+	eyebrow="Eyebrow Text"
+  heading="Split Media Block Reversed"
+  image="https://images.unsplash.com/photo-1568801556940-e5b3a55fa6ea?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  imageAlt="Canyon landscape"
+	imageCaption="Example of an image caption goes here."
+>
+  Different content here with **bold** and *italic*.
+</SplitMedia>

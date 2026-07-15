@@ -9,6 +9,7 @@
     links: { href: string, label: string, classes?: string }[]  # Nav links (required)
     classes?: string                                            # Additional classes for ul
     linkClasses?: string                                        # Additional classes for all links
+    showActive?: boolean                                        # Show active state (default: true)
 
   Examples:
     <NavList links={navLinks} />
@@ -17,6 +18,7 @@
       links={navLinks}
       classes="p-nav-list--mobile"
       linkClasses="text-xl text-gray-100"
+      showActive={false}
     />
 */
 
@@ -32,12 +34,14 @@ interface Props {
   links: NavLink[];
   classes?: string;
   linkClasses?: string;
+  showActive?: boolean;
 }
 
 const {
   links = [],
   classes = '',
   linkClasses = '',
+  showActive = true,
 } = Astro.props;
 
 const ulClass = ['p-nav-list', classes].filter(Boolean).join(' ');
@@ -54,7 +58,7 @@ const isActive = (href: string) => Astro.url.pathname === href;
         <a
           href={link.href}
           class={linkClass}
-          aria-current={isActive(link.href) ? 'page' : undefined}
+          aria-current={showActive && isActive(link.href) ? 'page' : undefined}
         >
           {link.label}
         </a>
@@ -62,3 +66,18 @@ const isActive = (href: string) => Astro.url.pathname === href;
     );
   })}
 </ul>
+
+<script>
+  function setActiveLink() {
+    document.querySelectorAll('.p-nav-list__link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === window.location.pathname) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', setActiveLink);
+</script>

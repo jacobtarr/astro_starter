@@ -2,6 +2,6 @@
 
 @layer components {
   .c-eyebrow {
-    @apply uppercase tracking-wider text-gray-500 text-sm md:text-base font-mono font-semibold leading-4;
+    @apply uppercase tracking-widest text-gray-500 text-sm font-bold;
   }
 }

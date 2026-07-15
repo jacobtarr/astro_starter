@@ -1,0 +1,27 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .c-breadcrumb {
+    @apply text-sm;
+  }
+
+  .c-breadcrumb__list {
+    @apply flex items-center gap-2 flex-wrap;
+  }
+
+  .c-breadcrumb__item {
+    @apply flex items-center gap-2;
+  }
+
+  .c-breadcrumb__link {
+    @apply text-gray-600 transition-colors;
+  }
+
+  .c-breadcrumb__current {
+    @apply text-gray-900;
+  }
+
+  .c-breadcrumb__separator {
+    @apply text-gray-600;
+  }
+}

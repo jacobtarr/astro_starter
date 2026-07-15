@@ -1,0 +1,25 @@
+@reference "@styles/index.css";
+
+@layer components {
+
+  .c-link {
+    @apply leading-tight relative no-underline inline-flex align-middle items-center gap-x-3 text-left transition-all;
+
+		.c-icon {
+			@apply h-5 w-5;
+		}
+  }
+
+  .c-link__icon--reverse {
+    @apply transform scale-x-[-1];
+  }
+
+	.c-link--dark {
+		@apply text-gray-100;
+
+		&:hover {
+			@apply text-primary;
+		}
+	}
+
+}

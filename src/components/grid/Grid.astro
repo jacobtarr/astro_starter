@@ -3,43 +3,49 @@
   Grid Component
 
   A layout primitive for creating consistent grid layouts.
-  Uses a 2-column mobile grid that expands to 12 columns on desktop.
 
   Props:
-    cols?: number                         # Number of desktop columns (default: 12)
+    cols?: number                         # Mobile columns (default: 2)
+    mdCols?: number                       # Tablet columns (default: 4)
+    lgCols?: number                       # Desktop columns (default: 12)
     gap?: number                          # Gap size (default: 8)
     align?: 'start' | 'center' | 'end'   # Vertical alignment (default: 'start')
     classes?: string                      # Additional classes
 
   Examples:
     <Grid>
-      <div class="col-span-6">Left</div>
-      <div class="col-span-6">Right</div>
+      <div class="col-span-2 md:col-span-2 lg:col-span-6">Left</div>
+      <div class="col-span-2 md:col-span-2 lg:col-span-6">Right</div>
     </Grid>
 
-    <Grid cols={12} gap={8} align="center">
-      <div class="col-span-5">Content</div>
-      <div class="col-span-6 col-start-7">Image</div>
+    <Grid cols={2} mdCols={4} lgCols={12} gap={8} align="center">
+      <div class="col-span-2 md:col-span-2 lg:col-span-3">Item</div>
     </Grid>
 */
 
 interface Props {
   cols?: number;
+  mdCols?: number;
+  lgCols?: number;
   gap?: number;
   align?: 'start' | 'center' | 'end';
   classes?: string;
 }
 
 const {
-  cols = 12,
+  cols = 2,
+  mdCols = 4,
+  lgCols = 12,
   gap = 8,
   align = 'start',
   classes = '',
 } = Astro.props;
 
 const className = [
-  'grid grid-cols-2',
-  `md:grid-cols-${cols}`,
+  'grid',
+  `grid-cols-${cols}`,
+  mdCols ? `md:grid-cols-${mdCols}` : '',
+  `lg:grid-cols-${lgCols}`,
   `gap-${gap}`,
   align !== 'start' ? `items-${align}` : '',
   classes,

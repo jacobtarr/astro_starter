@@ -1,0 +1,48 @@
+---
+import Page from '@layouts/Page.astro';
+import RichText from '@components/rich-text/RichText.astro';
+import Badge from '@components/badge/Badge.astro';
+import Breadcrumb from '@components/breadcrumb/Breadcrumb.astro';
+import Heading from '@components/heading/Heading.astro';
+import Eyebrow from '@components/eyebrow/Eyebrow.astro';
+import IconGroup from '@patterns/icon-group/IconGroup.astro';
+import PostHeader from '@patterns/post-header/PostHeader.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { date, readTime } = post.data;
+
+const shareLinks = [
+  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${Astro.url}&text=${encodeURIComponent(post.data.title)}` },
+  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${Astro.url}` },
+];
+---
+
+<Page>
+  <PostHeader
+    title={post.data.title}
+    image={post.data.image}
+    imageAlt={post.data.imageAlt}
+    excerpt={post.data.excerpt}
+    category={post.data.category}
+    categoryHref={post.data.category ? `/blog/category/${post.data.category.toLowerCase()}` : undefined}
+    date={post.data.date}
+    readTime={post.data.readTime}
+  />
+  <article class="container mx-auto py-12 md:py-20">
+    <div class="max-w-3xl mx-auto space-y-8">
+      <RichText variant="large">
+        <Content />
+      </RichText>
+    </div>
+  </article>
+</Page>

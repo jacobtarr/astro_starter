@@ -1,0 +1,21 @@
+---
+title: "Sedona sunrise: The red rocks awake"
+date: "July 15, 2026"
+excerpt: "Watching the first light hit Cathedral Rock in Sedona, Arizona. A quiet morning of deep crimson tones, cool mountain air, and a landscape waking up."
+readTime: "4 min read"
+image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop"
+imageAlt: "The iconic red rocks of Sedona catching the first morning light"
+category: "Photography"
+---
+
+There is a brief window of time in Sedona just before the sun clears the eastern ridges. The air is surprisingly cool, holding onto the high-desert chill of the night, and the towering sandstone formations look like giant, dark sentinels guarding the valley.
+
+I stood by the banks of Oak Creek, camera ready, listening to the gentle rush of water over smooth stones.
+
+## The glow of Cathedral Rock
+
+When the sun finally breaks, it doesn’t just light up the sky; it ignites the stone. Cathedral Rock begins to glow from the top down, a brilliant, intense orange that looks almost artificial against the deep blue of the sky. 
+
+The contrast is what catches your breath. In photography, we talk a lot about dynamic range, but standing here, you realize no sensor can fully capture the transition from the cool blue shadows of the creek bed to the fiery peak of the sandstone.
+
+I pressed the shutter, knowing the camera would only capture a fraction of it. But sometimes, the act of framing the shot is how you truly commit a moment to memory.

@@ -25,11 +25,11 @@ const { classes = '' } = Astro.props;
 const className = ['c-logo', classes].filter(Boolean).join(' ');
 ---
 
-<a href="/" class={className}>
+<a href="/" class={className} aria-label="Site logo">
   <div class="c-logo__image">
     <Icon name="logo" />
   </div>
   <p class="c-logo__text">
-    Brand <span class="text-secondary">Name</span>
+    Brand <span class="text-primary">Name</span>
   </p>
 </a>

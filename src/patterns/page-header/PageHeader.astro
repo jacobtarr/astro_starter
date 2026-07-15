@@ -1,0 +1,54 @@
+---
+/*
+  PageHeader Pattern
+
+  A full-width hero header with background image and overlay content.
+  Used for category pages and other section landing pages.
+
+  Props:
+    heading: string                       # Main heading (required)
+    description?: string                  # Optional description text
+    image?: string                        # Background image URL
+    imageAlt?: string                     # Image alt text (default: '')
+
+  Examples:
+    <PageHeader
+      heading="Photography"
+      description="Landscapes, light and the art of seeing."
+      image="https://images.unsplash.com/..."
+      imageAlt="Canyon landscape"
+    />
+*/
+
+import './page-header.css';
+import Heading from '@components/heading/Heading.astro';
+import RichText from '@components/rich-text/RichText.astro';
+
+interface Props {
+  heading: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const {
+  heading,
+  description,
+  image,
+  imageAlt = '',
+} = Astro.props;
+---
+
+<div class="c-page-header relative h-[400px] overflow-hidden">
+  {image && (
+    <img src={image} alt={imageAlt} class="absolute inset-0 w-full h-full object-cover" />
+  )}
+  <div class="c-page-header__content absolute z-10 inset-0 container mx-auto flex items-center">
+    <div class="space-y-6 max-w-[400px]">
+      <Heading theme="dark" text={heading} tag="h1" size="h1" />
+      {description && (
+        <RichText theme="dark" variant="large" content={`<p>${description}</p>`} />
+      )}
+    </div>
+  </div>
+</div>

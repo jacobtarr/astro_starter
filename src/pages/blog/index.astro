@@ -1,0 +1,77 @@
+---
+import Page from '@layouts/Page.astro';
+import Heading from '@components/heading/Heading.astro';
+import Link from '@components/link/Link.astro';
+import FeaturedPost from '@blocks/featured-post/FeaturedPost.astro';
+import CategoryTabs from '@components/category-tabs/CategoryTabs.astro';
+import BlogCard from '@patterns/blog-card/BlogCard.astro';
+import Pagination from '@patterns/pagination/Pagination.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+const sorted = posts.sort((a, b) =>
+  new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+
+const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))].sort() as string[];
+
+const featured = sorted.find(p => p.data.featured) ?? sorted[0];
+
+// warn in dev if multiple featured posts
+if (import.meta.env.DEV) {
+  const featuredCount = sorted.filter(p => p.data.featured).length;
+  if (featuredCount > 1) {
+    console.warn(`⚠️ Multiple featured posts found (${featuredCount}). Only the most recent will be shown.`);
+  }
+}
+
+const rest = sorted.filter(p => p.id !== featured.id);
+
+const POSTS_PER_PAGE = 8;
+const totalPages = Math.ceil(rest.length / POSTS_PER_PAGE);
+const paginatedPosts = rest.slice(0, POSTS_PER_PAGE);
+---
+
+<Page>
+  {featured && (
+    <FeaturedPost
+      eyebrow="Featured Post"
+      heading={featured.data.title}
+      content={featured.data.excerpt ? `<p>${featured.data.excerpt}</p>` : undefined}
+      image={featured.data.image}
+      imageAlt={featured.data.imageAlt}
+      href={`/blog/${featured.id}`}
+      date={featured.data.date}
+      readTime={featured.data.readTime}
+    />
+  )}
+
+  <section class="container mx-auto pb-12 md:pb-20">
+    <div class="space-y-12">
+      <CategoryTabs
+        categories={categories}
+        currentCategory="all"
+        baseUrl="/blog"
+      />
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-8">
+        {paginatedPosts.map(post => (
+					<div class="col-span-2 md:col-span-1 lg:col-span-3">
+						<BlogCard
+							image={post.data.image}
+							imageAlt={post.data.imageAlt}
+							category={post.data.category}
+							heading={post.data.title}
+							href={`/blog/${post.id}`}
+							date={post.data.date}
+							readTime={post.data.readTime}
+						/>
+					</div>
+				))}
+      </div>
+      <Pagination currentPage={1} totalPages={totalPages} baseUrl="/blog" />
+    </div>
+  </section>
+</Page>

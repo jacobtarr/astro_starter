@@ -1,0 +1,81 @@
+---
+import Page from '@layouts/Page.astro';
+import BlogCard from '@patterns/blog-card/BlogCard.astro';
+import CategoryTabs from '@components/category-tabs/CategoryTabs.astro';
+import PageHeader from '@patterns/page-header/PageHeader.astro';
+import Pagination from '@patterns/pagination/Pagination.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const categories = [...new Set(allPosts.map(p => p.data.category).filter(Boolean))] as string[];
+  const allCategories = [...new Set(allPosts.map(p => p.data.category).filter(Boolean))].sort() as string[];
+
+  const POSTS_PER_PAGE = 8;
+  const paths = [];
+
+  for (const category of categories) {
+    const categoryPosts = allPosts
+      .filter(p => p.data.category?.toLowerCase() === category.toLowerCase())
+      .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+    const totalPages = Math.ceil(categoryPosts.length / POSTS_PER_PAGE);
+
+    for (let i = 2; i <= totalPages; i++) {
+      paths.push({
+        params: { category: category.toLowerCase(), page: String(i) },
+        props: {
+          category,
+          page: i,
+          totalPages,
+          posts: categoryPosts.slice((i - 1) * POSTS_PER_PAGE, i * POSTS_PER_PAGE),
+          categories: allCategories,
+          heroImage: categoryPosts[0]?.data.image,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { category, page, totalPages, posts, categories, heroImage } = Astro.props;
+---
+
+<Page>
+  <PageHeader
+    heading={category}
+    description="Lorem ipsum dolor sit amet consectetur."
+    image={heroImage}
+    imageAlt={category}
+  />
+  <section class="container mx-auto py-12 md:py-20">
+    <div class="space-y-12">
+      <CategoryTabs
+        categories={categories}
+        currentCategory={category}
+        baseUrl="/blog"
+      />
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-8">
+        {posts.map(post => (
+          <div class="col-span-2 md:col-span-1 lg:col-span-3">
+            <BlogCard
+              image={post.data.image}
+              imageAlt={post.data.imageAlt}
+              category={post.data.category}
+              heading={post.data.title}
+              href={`/blog/${post.id}`}
+              date={post.data.date}
+              readTime={post.data.readTime}
+            />
+          </div>
+        ))}
+      </div>
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        baseUrl={`/blog/category/${category.toLowerCase()}`}
+      />
+    </div>
+  </section>
+</Page>

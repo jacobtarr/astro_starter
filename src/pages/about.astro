@@ -1,0 +1,16 @@
+---
+import Page from '@layouts/Page.astro';
+import { getEntry, render } from 'astro:content';
+
+const about = await getEntry('pages', 'about');
+
+if (!about) {
+  throw new Error('About page content not found');
+}
+
+const { Content } = await render(about);
+---
+
+<Page>
+  <Content />
+</Page>

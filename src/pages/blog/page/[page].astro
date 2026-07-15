@@ -1,0 +1,81 @@
+---
+import Page from '@layouts/Page.astro';
+import FeaturedPost from '@blocks/featured-post/FeaturedPost.astro';
+import CategoryTabs from '@components/category-tabs/CategoryTabs.astro';
+import BlogCard from '@patterns/blog-card/BlogCard.astro';
+import Pagination from '@patterns/pagination/Pagination.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
+
+  const sorted = posts.sort((a, b) =>
+    new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+  );
+
+  const featured = sorted.find(p => p.data.featured) ?? sorted[0];
+  const rest = sorted.filter(p => p.id !== featured.id);
+
+  const POSTS_PER_PAGE = 8;
+  const totalPages = Math.ceil(rest.length / POSTS_PER_PAGE);
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => {
+    const page = i + 2;
+    return {
+      params: { page: String(page) },
+      props: {
+        page,
+        totalPages,
+        featured,
+        posts: rest.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE),
+        categories: [...new Set(posts.map(p => p.data.category).filter(Boolean))].sort() as string[],
+      },
+    };
+  });
+}
+
+const { page, totalPages, posts, categories, featured } = Astro.props;
+
+---
+
+<Page>
+	{featured && (
+    <FeaturedPost
+      eyebrow="Featured Post"
+      heading={featured.data.title}
+      content={featured.data.excerpt ? `<p>${featured.data.excerpt}</p>` : undefined}
+      image={featured.data.image}
+      imageAlt={featured.data.imageAlt}
+      href={`/blog/${featured.id}`}
+      date={featured.data.date}
+      readTime={featured.data.readTime}
+    />
+  )}
+  <section class="container mx-auto pb-12 md:pb-20">
+    <div class="space-y-12">
+      <CategoryTabs
+        categories={categories}
+        currentCategory="all"
+        baseUrl="/blog"
+      />
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-8">
+        {posts.map(post => (
+          <div class="col-span-2 md:col-span-1 lg:col-span-3">
+            <BlogCard
+              image={post.data.image}
+              imageAlt={post.data.imageAlt}
+              category={post.data.category}
+              heading={post.data.title}
+              href={`/blog/${post.id}`}
+              date={post.data.date}
+              readTime={post.data.readTime}
+            />
+          </div>
+        ))}
+      </div>
+      <Pagination currentPage={page} totalPages={totalPages} baseUrl="/blog" />
+    </div>
+  </section>
+</Page>

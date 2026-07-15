@@ -13,6 +13,7 @@
       "@globals/*": ["src/globals/*"],
       "@layouts/*": ["src/layouts/*"],
       "@assets/*": ["src/assets/*"],
+      "@content/*": ["src/content/*"],
       "@src/*": ["./src/*"],
     }
   }

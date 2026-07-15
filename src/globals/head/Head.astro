@@ -15,9 +15,7 @@
     <Head />
 */
 
-import '@fontsource/ibm-plex-mono/500.css';
-import '@fontsource-variable/geist/wght.css';
-import '@styles/index.css';
+import { ClientRouter } from 'astro:transitions';
 import { siteTitle, siteDescription } from '@src/consts';
 
 interface Props {
@@ -41,9 +39,9 @@ const canonicalURL = Astro.site
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="generator" content={Astro.generator} />
-
+<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="canonical" href={canonicalURL && <link rel="canonical" href={canonicalURL} />} />
+{canonicalURL && <link rel="canonical" href={canonicalURL} />}
 
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -53,3 +51,4 @@ const canonicalURL = Astro.site
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 {ogImage && <meta property="og:image" content={ogImage} />}
+<ClientRouter />

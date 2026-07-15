@@ -4,11 +4,20 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 
 import alpinejs from '@astrojs/alpinejs';
+import ViteRestart from 'vite-plugin-restart';
+
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      ViteRestart({
+        reload: ['src/**/*.css'],
+      }),
+    ],
+    
     resolve: {
       alias: {
         '@styles': path.resolve('./src/styles'),
@@ -19,10 +28,11 @@ export default defineConfig({
         '@layouts': path.resolve('./src/layouts'),
         '@pages': path.resolve('./src/pages'),
         '@assets': path.resolve('./src/assets'),
+        '@content': path.resolve('./src/content'),
         '@src': path.resolve('./src'),
       },
     },
   },
 
-  integrations: [alpinejs({ entrypoint: '/src/scripts/alpine' })],
+  integrations: [alpinejs({ entrypoint: '/src/scripts/alpine' }), mdx()],
 });
