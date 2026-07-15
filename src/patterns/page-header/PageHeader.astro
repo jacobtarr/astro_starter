@@ -39,12 +39,12 @@ const {
 } = Astro.props;
 ---
 
-<div class="c-page-header relative h-[400px] overflow-hidden">
+<div class="c-page-header relative h-[500px] md:h-[400px] overflow-hidden">
   {image && (
     <img src={image} alt={imageAlt} class="absolute inset-0 w-full h-full object-cover" />
   )}
-  <div class="c-page-header__content absolute z-10 inset-0 container mx-auto flex items-center">
-    <div class="space-y-6 max-w-[400px]">
+  <div class="c-page-header__content absolute z-10 inset-0 container mx-auto flex justify-center items-end md:justify-start md:items-center">
+    <div class="space-y-6 md:max-w-[400px] pb-12 md:pb-0">
       <Heading theme="dark" text={heading} tag="h1" size="h1" />
       {description && (
         <RichText theme="dark" variant="large" content={`<p>${description}</p>`} />

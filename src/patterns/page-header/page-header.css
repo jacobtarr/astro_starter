@@ -7,7 +7,11 @@
 			position: absolute;
 			inset: 0;
 			z-index: 1;
-			background: linear-gradient(to right, rgb(0, 0, 0) 15%, rgba(0, 0, 0, 0) 75%);
+			background: linear-gradient(to top, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%);
+
+			@media (width >= theme(--breakpoint-md)) {
+				background: linear-gradient(to right, rgb(0, 0, 0) 15%, rgba(0, 0, 0, 0) 75%);
+			}
 		}
 	}
 }

@@ -3,7 +3,7 @@ import Page from '@layouts/Page.astro';
 import BlogCard from '@patterns/blog-card/BlogCard.astro';
 import CategoryTabs from '@components/category-tabs/CategoryTabs.astro';
 import PageHeader from '@patterns/page-header/PageHeader.astro';
-import Pagination from '@patterns/pagination/Pagination.astro';
+import Button from '@components/button/Button.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -26,8 +26,6 @@ const sorted = posts.sort((a, b) =>
 );
 
 const POSTS_PER_PAGE = 8;
-const totalPages = Math.ceil(sorted.length / POSTS_PER_PAGE);
-const paginatedPosts = sorted.slice(0, POSTS_PER_PAGE);
 ---
 
 <Page>
@@ -44,28 +42,36 @@ const paginatedPosts = sorted.slice(0, POSTS_PER_PAGE);
         currentCategory={category}
         baseUrl="/blog"
       />
-      <div class="grid grid-cols-2 lg:grid-cols-12 gap-8">
-        {paginatedPosts.map(post => (
-          <div class="col-span-2 md:col-span-1 lg:col-span-3">
-            <BlogCard
-              image={post.data.image}
-              imageAlt={post.data.imageAlt}
-              category={post.data.category}
-              heading={post.data.title}
-              href={`/blog/${post.id}`}
-              date={post.data.date}
-              readTime={post.data.readTime}
+      <div x-data={`{ showing: ${POSTS_PER_PAGE} }`}>
+        <div class="grid grid-cols-2 lg:grid-cols-12 gap-8">
+          {sorted.map((post, index) => (
+            <div
+              class="col-span-2 md:col-span-1 lg:col-span-3"
+              x-show={`${index} < showing`}
+            >
+              <BlogCard
+                image={post.data.image}
+                imageAlt={post.data.imageAlt}
+                category={post.data.category}
+                heading={post.data.title}
+                href={`/blog/${post.id}`}
+                date={post.data.date}
+                readTime={post.data.readTime}
+              />
+            </div>
+          ))}
+        </div>
+        {sorted.length > POSTS_PER_PAGE && (
+          <div class="text-center mt-12" x-show={`showing < ${sorted.length}`}>
+            <Button
+              tag="button"
+              text="Load more"
+              variant="secondary"
+              attrs={{ '@click': `showing += ${POSTS_PER_PAGE}` }}
             />
           </div>
-        ))}
+        )}
       </div>
-      {totalPages > 1 && (
-        <Pagination
-          currentPage={1}
-          totalPages={totalPages}
-          baseUrl={`/blog/category/${category.toLowerCase()}`}
-        />
-      )}
     </div>
   </section>
 </Page>
