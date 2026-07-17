@@ -4,9 +4,15 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 
 import alpinejs from '@astrojs/alpinejs';
+import keystatic from '@keystatic/astro';
 import ViteRestart from 'vite-plugin-restart';
 
 import mdx from '@astrojs/mdx';
+
+import react from '@astrojs/react';
+import markdoc from '@astrojs/markdoc';
+
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
@@ -34,5 +40,13 @@ export default defineConfig({
     },
   },
 
-  integrations: [alpinejs({ entrypoint: '/src/scripts/alpine' }), mdx()],
+  integrations: [
+    alpinejs({ entrypoint: '/src/scripts/alpine' }),
+    mdx(),
+    keystatic(),
+    react(),
+    markdoc(),
+  ],
+
+  adapter: netlify(),
 });

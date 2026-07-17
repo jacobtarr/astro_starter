@@ -5,8 +5,12 @@ import Badge from '@components/badge/Badge.astro';
 import Breadcrumb from '@components/breadcrumb/Breadcrumb.astro';
 import Heading from '@components/heading/Heading.astro';
 import Eyebrow from '@components/eyebrow/Eyebrow.astro';
+import TableOfContents from '@components/table-of-contents/TableOfContents.astro';
 import IconGroup from '@patterns/icon-group/IconGroup.astro';
 import PostHeader from '@patterns/post-header/PostHeader.astro';
+import CardGroup from '@patterns/card-group/CardGroup.astro';
+import { capitalize } from '@src/utils/helpers';
+import FigureMdx from '@components/figure/FigureMdx.astro'; 
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -18,13 +22,17 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
-const { date, readTime } = post.data;
+const { Content, headings } = await render(post);
 
-const shareLinks = [
-  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${Astro.url}&text=${encodeURIComponent(post.data.title)}` },
-  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${Astro.url}` },
-];
+const allPosts = await getCollection('blog');
+
+const relatedPosts = allPosts
+  .filter(entry => entry.id !== post.id)
+  .filter(entry => entry.data.category === post.data.category)
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+  .slice(0, 3);
+
+console.log(relatedPosts);
 ---
 
 <Page>
@@ -38,11 +46,26 @@ const shareLinks = [
     date={post.data.date}
     readTime={post.data.readTime}
   />
-  <article class="container mx-auto py-12 md:py-20">
-    <div class="max-w-3xl mx-auto space-y-8">
-      <RichText variant="large">
-        <Content />
-      </RichText>
+  <article id="post-content" class="container mx-auto py-12 md:py-20">
+    <div class="grid grid-cols-12 gap-16">
+      <div class="col-span-3">
+        <TableOfContents headings={headings} />
+      </div>
+      <div class="col-span-6 space-y-8">
+        <RichText variant="large">
+          <Content components={{ img: FigureMdx }} />
+        </RichText>
+      </div>
     </div>
+    <!-- <div class="max-w-3xl mx-auto space-y-8">
+      
+    </div> -->
   </article>
+  {relatedPosts.length > 0 &&
+    <CardGroup
+      posts={relatedPosts}
+      heading={`More from ${capitalize(post.data.category ?? '')}`}
+    />
+  }
+  
 </Page>

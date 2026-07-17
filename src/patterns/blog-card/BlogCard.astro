@@ -30,6 +30,7 @@ import Image from '@components/image/Image.astro';
 import Heading from '@components/heading/Heading.astro';
 import Badge from '@components/badge/Badge.astro';
 import PostMeta from '@components/post-meta/PostMeta.astro';
+import { capitalize } from '@src/utils/helpers';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -61,7 +62,7 @@ const {
   )}
   <div class="p-blog-card__content space-y-8">
     <div class="space-y-2">
-      {category && <Badge text={category} />}
+      {category && <Badge text={capitalize(category)} />}
       {heading && (
         <Heading
           text={heading}

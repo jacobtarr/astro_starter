@@ -9,10 +9,15 @@ const pages = defineCollection({
 });
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  loader: glob({
+    pattern: '**/index.{md,mdx,mdoc}',
+    base: './src/content/blog',
+    generateId: ({ entry }) =>
+      entry.replace(/[\\/]index\.(md|mdx|mdoc)$/, '').replace(/\\/g, '/'),
+  }),
   schema: z.object({
     title: z.string(),
-    date: z.string(),
+    date: z.coerce.string(),
     excerpt: z.string().optional(),
     readTime: z.string().optional(),
     image: z.string().optional(),
@@ -23,4 +28,11 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { pages, blog };
+const categories = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx,mdoc,yaml}', base: './src/content/categories' }),
+  schema: z.object({
+    name: z.string(),
+  }),
+});
+
+export const collections = { pages, blog, categories };

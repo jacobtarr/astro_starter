@@ -1,0 +1,48 @@
+@reference "@styles/index.css";
+
+@layer components {
+
+	.c-toc-wrapper {
+		@apply sticky top-4;
+	}
+
+	.c-toc {
+		@apply relative py-2 pl-6;
+	}
+
+	.c-toc__progress {
+		@apply bg-gray-200 w-[2px] absolute top-0 right-auto bottom-0 left-0;
+	}
+
+	.c-toc__list {
+		@apply flex flex-col items-start gap-4;
+	}
+
+	.c-toc__link {
+		@apply leading-none underline relative;
+
+		&.is-current {
+			@apply text-primary;
+
+			&::before {
+				content: '';
+				
+				@apply block absolute left-[-27px] top-[7px] w-2 h-2
+				bg-primary outline-2 outline-white rounded-full
+				z-10;
+			}
+		}
+	}
+
+	.c-toc__progress-bar {
+    transform-origin: 50% 0;
+		will-change: width, height;
+
+		@apply bg-primary w-full h-0;
+		
+		&.is-ready {
+			transition: height 0.1s linear;
+		}
+	}
+
+}

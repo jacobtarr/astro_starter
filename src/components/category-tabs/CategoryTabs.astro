@@ -20,6 +20,7 @@
 */
 
 import './category-tabs.css';
+import { capitalize } from '@src/utils/helpers';
 
 interface Props {
   categories: string[];
@@ -47,7 +48,7 @@ const navClass = ['c-category-tabs', classes].filter(Boolean).join(' ');
   <ul class="c-category-tabs__list">
     {['all', ...categories].map(category => {
       const isActive = category === currentCategory;
-      const label = category === 'all' ? allLabel : category;
+      const label = category === 'all' ? allLabel : capitalize(category);
       return (
         <li class="c-category-tabs__item">
           <a

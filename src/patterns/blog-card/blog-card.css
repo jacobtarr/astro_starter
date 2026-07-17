@@ -3,6 +3,10 @@
 @layer components {
 	.p-blog-card {
 		@apply rounded-lg inset-ring inset-ring-gray-400/20 shadow-sm overflow-hidden h-full flex flex-col transition-all;
+
+		&:hover {
+			@apply shadow-lg;
+		}
 	}
 
 	.p-blog-card__image {
@@ -12,7 +16,7 @@
 	}
 
 	.p-blog-card__content {
-		@apply p-6 flex flex-col flex-1;
+		@apply p-6 flex flex-col flex-1 bg-white;
 	}
 
 	.p-blog-card__meta {

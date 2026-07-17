@@ -1,0 +1,22 @@
+@reference "@styles/index.css";
+
+@layer components {
+
+	.p-card-group {
+		@apply bg-gray-100;
+
+		[class*="grid"] {
+			@apply
+			flex md:grid
+			overflow-x-auto md:overflow-visible
+			scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
+			-mx-4 md:mx-0 px-4 md:px-0 scroll-px-4
+  		-mb-4 pb-4 md:mb-0 md:pb-0;
+
+			> * {
+				@apply snap-start min-w-[250px] md:min-w-[0] md:min-h-0;
+			}
+		}
+	}
+
+}

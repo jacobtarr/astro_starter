@@ -23,6 +23,7 @@
 import './page-header.css';
 import Heading from '@components/heading/Heading.astro';
 import RichText from '@components/rich-text/RichText.astro';
+import { capitalize } from '@src/utils/helpers';
 
 interface Props {
   heading: string;
@@ -45,7 +46,7 @@ const {
   )}
   <div class="c-page-header__content absolute z-10 inset-0 container mx-auto flex justify-center items-end md:justify-start md:items-center">
     <div class="space-y-6 md:max-w-[400px] pb-12 md:pb-0">
-      <Heading theme="dark" text={heading} tag="h1" size="h1" />
+      <Heading theme="dark" text={capitalize(heading)} tag="h1" size="h1" />
       {description && (
         <RichText theme="dark" variant="large" content={`<p>${description}</p>`} />
       )}

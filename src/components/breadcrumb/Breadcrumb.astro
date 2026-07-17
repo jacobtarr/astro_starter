@@ -21,6 +21,7 @@
 */
 
 import './breadcrumb.css';
+import { capitalize } from '@src/utils/helpers';
 
 interface BreadcrumbItem {
   href?: string;
@@ -54,14 +55,14 @@ const baseLinkClass = ['c-breadcrumb__link', linkClasses].filter(Boolean).join('
           <li class="c-breadcrumb__item">
             {item.href ? (
               <a href={item.href} class={baseLinkClass}>
-                {item.label}
+                {capitalize(item.label)}
               </a>
             ) : (
               <span
                 class="c-breadcrumb__current"
                 aria-current={isLast ? 'page' : undefined}
               >
-                {item.label}
+                {capitalize(item.label)}
               </span>
             )}
             {!isLast && (

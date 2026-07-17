@@ -1,0 +1,139 @@
+---
+/*
+  TableOfContents Component
+
+  Sticky sidebar with scroll progress bar and active heading tracking.
+
+  Props:
+    headings: { depth: number; slug: string; text: string }[]  # Headings from render() (required)
+
+  Examples:
+    const { Content, headings } = await render(post);
+    <TableOfContents headings={headings} />
+*/
+
+import './table-of-contents.css';
+
+type Heading = { depth: number; slug: string; text: string };
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+<aside
+  class="c-toc-wrapper space-y-4"
+  x-data="{
+    active: '',
+    progress: 0,
+    setActive(slug) {
+      this.active = slug;
+    },
+    init() {
+			let isScrolling = false;
+			const preventWheel = (e) => e.preventDefault();
+
+			this.$el.addEventListener('toc-click', () => {
+				window.addEventListener('wheel', preventWheel, { passive: false });
+			});
+
+			window.addEventListener('scrollend', () => {
+				isScrolling = false;
+				window.removeEventListener('wheel', preventWheel);
+				updateProgress();
+			});
+
+			// Restore scroll on reload with hash
+			if (window.location.hash) {
+				const target = document.querySelector(window.location.hash);
+				if (target) {
+					target.scrollIntoView();
+				}
+			}
+
+			// Handle back/forward
+			window.addEventListener('popstate', (e) => {
+				if (e.state?.scrollY !== undefined) {
+					window.scrollTo(0, e.state.scrollY);
+				}
+			});
+
+			const updateProgress = () => {
+			const article = document.querySelector('#post-content');
+			if (!article) return;
+
+			const headings = [...document.querySelectorAll('#post-content h2, #post-content h3')];
+			const passed = headings.filter(heading => heading.getBoundingClientRect().top <= 150);
+			const activeHeading = passed.length > 0 ? passed[passed.length - 1] : headings[0];
+
+			if (!isScrolling && activeHeading) this.active = activeHeading.id;
+
+			const activeIndex = headings.indexOf(activeHeading);
+			const nextHeading = headings[activeIndex + 1];
+
+			if (nextHeading) {
+				// Interpolate between current and next heading position
+				const currentTop = activeHeading.getBoundingClientRect().top;
+				const nextTop = nextHeading.getBoundingClientRect().top;
+				const segmentHeight = nextTop - currentTop;
+				const segmentProgress = Math.max(0, Math.min(1, (150 - currentTop) / segmentHeight));
+				const baseProgress = (activeIndex / headings.length) * 100;
+				const segmentSize = (1 / headings.length) * 100;
+				this.progress = baseProgress + (segmentProgress * segmentSize);
+			} else {
+				// Last heading — fill to 100%
+				const { top, height } = article.getBoundingClientRect();
+				const scrolled = Math.max(0, -top);
+				const baseProgress = ((headings.length - 1) / headings.length) * 100;
+				this.progress = baseProgress + Math.min(1, scrolled / (height - window.innerHeight)) * (100 / headings.length);
+			}
+		};
+
+			updateProgress();
+			requestAnimationFrame(() => {
+				const bar = document.querySelector('.c-toc__progress-bar');
+				if (bar) bar.classList.add('is-ready');
+			});
+			window.addEventListener('scroll', updateProgress, { passive: true });
+			window.addEventListener('scrollend', () => {
+				isScrolling = false;
+				updateProgress();
+			});
+		}
+  }"
+>
+  <p class="font-bold">In this article</p>
+  <div class="c-toc">
+    <ul class="c-toc__list">
+      {filteredHeadings.map((heading: Heading) => (
+        <li>
+          <a
+            class="c-toc__link"
+            :class={`active === '${heading.slug}' ? 'is-current' : ''`}
+            href={`#${heading.slug}`}
+            @click.prevent={`
+							isScrolling = true;
+							$el.closest('aside').dispatchEvent(new CustomEvent('toc-click'));
+							const href = $el.getAttribute('href');
+							const target = document.querySelector(href);
+							if (target) {
+								const currentScroll = window.scrollY;
+								history.pushState({ scrollY: currentScroll }, '', href);
+								target.scrollIntoView({ behavior: 'smooth' });
+							}
+						`}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="c-toc__progress">
+      <div class="c-toc__progress-bar" :style="`height: ${progress}%`"></div>
+    </div>
+  </div>
+</aside>

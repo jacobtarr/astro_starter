@@ -7,7 +7,7 @@
   }
 
   h1 { @apply leading-[1.05] text-5xl lg:text-7xl; }
-  h2 { @apply leading-[1.1] text-4xl lg:text-6xl; }
+  h2 { @apply leading-[1.05] text-4xl lg:text-6xl; }
   h3 { @apply leading-[1.1] text-3xl  lg:text-4xl; }
   h4 { @apply leading-[1.15] text-2xl  lg:text-3xl; }
   h5 { @apply leading-[1.15] text-xl lg:text-2xl; }
@@ -22,7 +22,7 @@
 
   /* Explicit overrides — classes take precedence over element defaults */
   .c-heading--h1 { @apply leading-[1.05] text-5xl lg:text-7xl; }
-  .c-heading--h2 { @apply leading-[1.1] text-4xl lg:text-6xl; }
+  .c-heading--h2 { @apply leading-[1.05] text-4xl lg:text-6xl; }
   .c-heading--h3 { @apply leading-[1.1] text-3xl  lg:text-4xl; }
   .c-heading--h4 { @apply leading-[1.15] text-2xl  lg:text-3xl; }
   .c-heading--h5 { @apply leading-[1.15] text-xl lg:text-2xl; }

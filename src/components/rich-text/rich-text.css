@@ -20,6 +20,10 @@
 
     p {
       @apply mb-4 last:mb-0;
+
+      &:empty {
+        display: none;
+      }
     }
 
     h2 {
@@ -111,12 +115,17 @@
     }
 
     figure {
-      @apply m-0 my-8;
+      @apply m-0 my-12;
+
+      &:has(figcaption) {
+        img {
+          @apply mb-0;
+        }
+      }
     }
 
     figcaption {
-      @apply text-sm text-center mt-2;
-      color: var(--color-gray-500);
+      @apply mt-2 text-gray-500;
     }
 
     table {

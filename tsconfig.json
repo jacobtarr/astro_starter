@@ -1,20 +1,45 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
-      "@styles/*": ["src/styles/*"],
-      "@blocks/*": ["src/blocks/*"],
-      "@components/*": ["src/components/*"],
-      "@patterns/*": ["src/patterns/*"],
-      "@globals/*": ["src/globals/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@assets/*": ["src/assets/*"],
-      "@content/*": ["src/content/*"],
-      "@src/*": ["./src/*"],
-    }
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@blocks/*": [
+        "src/blocks/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@patterns/*": [
+        "src/patterns/*"
+      ],
+      "@globals/*": [
+        "src/globals/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@content/*": [
+        "src/content/*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

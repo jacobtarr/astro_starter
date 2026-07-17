@@ -8,6 +8,6 @@
 	}
 
 	.c-figure__caption {
-		@apply text-gray-500 text-sm mt-2;
+		@apply text-gray-500 text-sm md:text-base mt-2;
 	}
 }
