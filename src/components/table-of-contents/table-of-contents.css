@@ -32,6 +32,10 @@
 				z-10;
 			}
 		}
+
+		.c-toc__item--nested & {
+			@apply pl-6;
+		}
 	}
 
 	.c-toc__progress-bar {

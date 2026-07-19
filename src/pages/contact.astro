@@ -1,13 +1,64 @@
 ---
 import Page from '@layouts/Page.astro';
 import Heading from '@components/heading/Heading.astro';
+import Button from '@components/button/Button.astro';
+import Switch from '@components/switch/Switch.astro';
+import FormField from '@components/form-field/FormField.astro';
+import RichText from '@components/rich-text/RichText.astro';
+import { actions } from 'astro:actions';
+
+export const prerender = false;
+
+const result = Astro.getActionResult(actions.contact);
 ---
 
-<Page>
-  <div class="container py-20">
-    <div class="space-y-8">
-      <Heading text="Contact" tag="h1" />
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+<Page useContainer>
+  <div class="grid grid-cols-2 md:grid-cols-12 gap-8 lg:gap-20 py-12 md:py-40">
+    <div class="col-span-2 md:col-span-5 md:col-start-2">
+      <div class="space-y-6">
+        <Heading text="Contact Me" tag="h1" />
+        <RichText variant="large" content="<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt suscipit culpa laboriosam sed qui cum explicabo rerum odio doloribus tenetur?</p>" />
+      </div>
+    </div>
+    <div class="col-span-2 md:col-span-5">
+      {result?.data?.success ? (
+        <div class="space-y-4">
+          <Heading text="Message sent" tag="h2" size="h4" />
+          <p class="text-gray-600">{result.data.message}</p>
+        </div>
+      ) : (
+        <form method="POST" action={actions.contact}>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <FormField id="first-name" name="first-name" label="First name" autocomplete="given-name" required />
+            <FormField id="last-name" name="last-name" label="Last name" autocomplete="family-name" />
+            <div class="sm:col-span-2">
+              <FormField type="email" id="email" name="email" label="Email" autocomplete="email" required />
+            </div>
+            <div class="sm:col-span-2">
+              <FormField type="textarea" id="message" name="message" label="Message" required />
+            </div>
+            <div class="sm:col-span-2">
+              <Switch id="agree-to-policies" name="agree-to-policies" required classes="flex gap-x-4">
+                By selecting this, you agree to our <a href="/privacy">privacy policy.</a>
+              </Switch>
+            </div>
+          </div>
+
+          {result?.error && (
+            <p class="mt-4 text-red-600">Something went wrong. Please check your fields and try again.</p>
+          )}
+
+          <div class="mt-12">
+            <Button
+              text="Let's talk"
+              variant="primary"
+              icon="arrow-right"
+              tag="button"
+              attrs={{ type: 'submit' }}
+            />
+          </div>
+        </form>
+      )}
     </div>
   </div>
 </Page>

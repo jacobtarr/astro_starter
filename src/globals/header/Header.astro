@@ -16,7 +16,11 @@ import MobileNav from '@globals/mobile-nav/MobileNav.astro';
 import { navLinks, socialLinks } from '@src/consts';
 ---
 
-<header x-data="headerState" class="c-header" transition:persist>
+<header
+  x-data="headerState"
+  class="c-header"
+  transition:persist
+>
   <div class="c-header__inner md:container">
     <Logo />
     <nav class="c-nav" aria-label="Primary">

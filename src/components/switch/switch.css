@@ -1,0 +1,22 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .c-switch__track {
+    @apply relative inline-flex w-8 shrink-0 rounded-full bg-gray-200 p-px
+		inset-ring inset-ring-gray-900/5 outline-offset-2 outline-primary
+		transition-colors duration-200 ease-in-out
+		has-checked:bg-primary has-focus-visible:outline-2;
+  }
+
+  .c-switch__knob {
+    @apply size-4 rounded-full bg-white shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out;
+  }
+
+	.c-switch__track:has(input:checked) .c-switch__knob {
+    @apply translate-x-3.5;
+  }
+
+  .c-switch__input {
+    @apply absolute inset-0 size-full appearance-none focus:outline-hidden;
+  }
+}

@@ -65,8 +65,7 @@ const {
   </div>
   <div
     id="mobile-nav"
-    x-show="open"
-    x-transition.opacity.duration.150ms
+    :class="{ 'is-open': open }"
     class="c-mobile-nav__drawer flex md:hidden"
     role="navigation"
     aria-label="Mobile site links"

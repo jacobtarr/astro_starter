@@ -22,6 +22,8 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const shareUrl = Astro.url.href;
+
 const { Content, headings } = await render(post);
 
 const allPosts = await getCollection('blog');
@@ -32,7 +34,10 @@ const relatedPosts = allPosts
   .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
   .slice(0, 3);
 
-console.log(relatedPosts);
+const shareLinks = [
+  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.data.title)}` },
+  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+];
 ---
 
 <Page>
@@ -46,21 +51,32 @@ console.log(relatedPosts);
     date={post.data.date}
     readTime={post.data.readTime}
   />
-  <article id="post-content" class="container mx-auto py-12 md:py-20">
-    <div class="grid grid-cols-12 gap-16">
-      <div class="col-span-3">
+  <div class="container mx-auto py-12 md:py-20">
+    <div class="grid grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-16">
+      <div class="hidden lg:block col-span-3">
         <TableOfContents headings={headings} />
       </div>
-      <div class="col-span-6 space-y-8">
+      <article id="post-content" class="col-span-2 lg:col-span-6 max-w-3xl mx-auto space-y-12 md:space-y-20">
         <RichText variant="large">
           <Content components={{ img: FigureMdx }} />
         </RichText>
-      </div>
+        <div class="flex items-center gap-3 pt-6 border-t border-gray-200">
+          <span class="text-gray-600">Share:</span>
+          <IconGroup
+            classes="flex gap-3"
+            icons={shareLinks.map(link => ({
+              name: link.name,
+              tag: 'a',
+              url: link.url,
+              target: '_blank',
+              classes: 'bg-gray-200 text-gray-900 h-8 w-8',
+              attrs: { rel: 'noopener noreferrer' }
+            }))}
+          />
+        </div>
+      </article>
     </div>
-    <!-- <div class="max-w-3xl mx-auto space-y-8">
-      
-    </div> -->
-  </article>
+  </div>
   {relatedPosts.length > 0 &&
     <CardGroup
       posts={relatedPosts}

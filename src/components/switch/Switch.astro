@@ -1,0 +1,55 @@
+---
+/*
+  Switch Component
+
+  A styled checkbox rendered as a toggle switch, for form use.
+
+  Props:
+    id: string                            # Checkbox id (required)
+    name: string                          # Checkbox name (required)
+    required?: boolean                    # Required field (default: false)
+    classes?: string                      # Additional classes for wrapper
+
+  Examples:
+    <Switch id="agree-to-policies" name="agree-to-policies" required>
+      By selecting this, you agree to our <a href="/privacy">privacy policy.</a>
+    </Switch>
+*/
+
+import './switch.css';
+
+interface Props {
+  id: string;
+  name: string;
+  required?: boolean;
+  classes?: string;
+}
+
+const {
+  id,
+  name,
+  required = false,
+  classes = '',
+} = Astro.props;
+
+const className = ['c-switch', classes].filter(Boolean).join(' ');
+---
+
+<div class={className}>
+  <div class="flex items-center">
+    <div class="c-switch__track">
+      <span class="c-switch__knob"></span>
+      <input
+        id={id}
+        type="checkbox"
+        name={name}
+        required={required}
+        aria-label="Agree to policies"
+        class="c-switch__input"
+      />
+    </div>
+  </div>
+  <label for={id} class="text-gray-500 leading-tight">
+    <slot />
+  </label>
+</div>

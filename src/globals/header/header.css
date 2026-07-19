@@ -20,7 +20,7 @@
 }
 
 .c-header__right-content {
-  @apply ml-12 h-full relative flex justify-end items-center block
+  @apply ml-12 h-full relative flex justify-end items-center
   md:hidden;
 }
 

@@ -6,6 +6,7 @@
 
   Props:
     headings: { depth: number; slug: string; text: string }[]  # Headings from render() (required)
+		classes?: string                                           # Additional classes
 
   Examples:
     const { Content, headings } = await render(post);
@@ -18,15 +19,18 @@ type Heading = { depth: number; slug: string; text: string };
 
 interface Props {
   headings: Heading[];
+	classes?: string;
 }
 
-const { headings } = Astro.props;
+const { headings, classes = '' } = Astro.props;
 
 const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+const wrapperClass = ['c-toc-wrapper space-y-4', classes].filter(Boolean).join(' ');
 ---
 
 <aside
-  class="c-toc-wrapper space-y-4"
+  class={wrapperClass}
   x-data="{
     active: '',
     progress: 0,
@@ -110,7 +114,7 @@ const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
   <div class="c-toc">
     <ul class="c-toc__list">
       {filteredHeadings.map((heading: Heading) => (
-        <li>
+        <li class:list={['c-toc__item', heading.depth === 3 && 'c-toc__item--nested']}>
           <a
             class="c-toc__link"
             :class={`active === '${heading.slug}' ? 'is-current' : ''`}
