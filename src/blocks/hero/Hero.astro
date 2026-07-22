@@ -4,6 +4,7 @@
 
   A two-column hero with content on the left and an image on the right.
   Supports a primary and secondary button beneath the content.
+  Image loads eagerly by default since heroes are typically above the fold.
 
   Props:
     eyebrow?: string                      # Eyebrow text above heading
@@ -12,6 +13,7 @@
     image?: ImageMetadata | string        # Local image or remote URL
     imageAlt?: string                     # Image alt text (default: '')
     imageCaption?: string                 # Optional image caption
+    imageLoading?: 'lazy' | 'eager'       # Image loading strategy (default: 'eager')
     primaryButtonText?: string            # Primary button text
     primaryButtonUrl?: string             # Primary button URL
     secondaryButtonText?: string          # Secondary button text
@@ -49,6 +51,7 @@ interface Props {
   image?: ImageMetadata | string;
   imageAlt?: string;
   imageCaption?: string;
+  imageLoading?: 'lazy' | 'eager';
   primaryButtonText?: string;
   primaryButtonUrl?: string;
   secondaryButtonText?: string;
@@ -65,6 +68,7 @@ const {
   image,
   imageAlt = '',
   imageCaption,
+  imageLoading = 'eager',
   primaryButtonText,
   primaryButtonUrl = '#',
   secondaryButtonText,
@@ -116,7 +120,7 @@ const imageClass = 'col-span-2 md:col-span-6';
     </div>
     <div class={imageClass}>
       {image && (
-        <Figure src={image} alt={imageAlt} caption={imageCaption} />
+        <Figure src={image} alt={imageAlt} caption={imageCaption} loading={imageLoading} />
       )}
     </div>
   </div>

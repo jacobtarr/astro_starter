@@ -12,7 +12,7 @@
   --container-2xl: 1352px;
 
   /* Colors */
-  --color-primary:    var(--color-blue-500);  /* actions */
+  --color-primary:    var(--color-blue-700);  /* actions */
   --color-text-dark:  var(--color-blue-950);  /* headings */
   --color-text-body:  var(--color-blue-800);  /* body text */
   --color-border:     var(--color-blue-400);  /* non-decorative borders */

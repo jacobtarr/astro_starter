@@ -12,8 +12,8 @@
     <IconGroup
       classes="flex gap-4"
       icons={[
-        { name: 'instagram', tag: 'a', url: 'https://instagram.com/jacobtarr', target: '_blank', attrs: { rel: 'noopener noreferrer' } },
-        { name: 'facebook', tag: 'a', url: 'https://facebook.com', target: '_blank', attrs: { rel: 'noopener noreferrer' } },
+        { name: 'instagram', tag: 'a', url: 'https://instagram.com/jacobtarr', target: '_blank', label: 'Follow on Instagram', attrs: { rel: 'noopener noreferrer' } },
+        { name: 'facebook', tag: 'a', url: 'https://facebook.com', target: '_blank', label: 'Follow on Facebook', attrs: { rel: 'noopener noreferrer' } },
       ]}
     />
 */
@@ -26,6 +26,7 @@ interface IconConfig {
   tag?: 'span' | 'a' | 'div';
   url?: string;
   target?: string;
+  label?: string;
   classes?: string;
   attrs?: Record<string, string>;
 }
@@ -50,6 +51,7 @@ const className = ['p-icon-group', classes].filter(Boolean).join(' ');
       tag={icon.tag}
       url={icon.url}
       target={icon.target}
+      label={icon.label}
       classes={icon.classes}
       attrs={icon.attrs}
     />

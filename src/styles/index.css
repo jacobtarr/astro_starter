@@ -34,7 +34,7 @@ body {
 
 @layer base {
   p {
-    @apply font-body leading-prose;
+    @apply font-body leading-normal;
   }
 
   a {

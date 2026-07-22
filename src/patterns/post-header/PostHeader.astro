@@ -70,8 +70,8 @@ const breadcrumbItems = [
 ];
 
 const shareLinks = [
-  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}` },
-  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`, label: 'Share on Twitter' },
+  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, label: 'Share on Facebook' },
 ];
 ---
 
@@ -102,6 +102,7 @@ const shareLinks = [
 								tag: 'a',
 								url: link.url,
 								target: '_blank',
+                label: link.label,
 								classes: 'bg-gray-200 text-gray-900 h-8 w-8',
 								attrs: { rel: 'noopener noreferrer' }
 							}))}

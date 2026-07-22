@@ -32,7 +32,7 @@ const POSTS_PER_PAGE = 8;
   <PageHeader
     heading={category}
     description="Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
-    image={sorted[0]?.data.image}
+    image={sorted[0]?.data.thumbnail}
     imageAlt={category}
   />
   <section class="container mx-auto py-12 md:py-20">
@@ -50,8 +50,8 @@ const POSTS_PER_PAGE = 8;
               x-show={`${index} < showing`}
             >
               <BlogCard
-                image={post.data.image}
-                imageAlt={post.data.imageAlt}
+                image={post.data.thumbnail}
+                imageAlt={post.data.thumbnailAlt}
                 category={post.data.category}
                 heading={post.data.title}
                 href={`/blog/${post.id}`}

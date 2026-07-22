@@ -15,13 +15,13 @@ const blog = defineCollection({
     generateId: ({ entry }) =>
       entry.replace(/[\\/]index\.(md|mdx|mdoc)$/, '').replace(/\\/g, '/'),
   }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     date: z.coerce.string(),
     excerpt: z.string().optional(),
     readTime: z.string().optional(),
-    image: z.string().optional(),
-    imageAlt: z.string().default(''),
+    thumbnail: image().optional(),
+    thumbnailAlt: z.string().default(''),
     category: z.string().optional(),
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),

@@ -6,9 +6,12 @@
   Composes the Image component with a figcaption.
 
   Props:
-    src: ImageMetadata                    # Imported image (required)
+    src: ImageMetadata | string           # Image (required)
     alt: string                           # Alt text (required)
     caption?: string                      # Optional caption text
+    loading?: 'lazy' | 'eager'            # Loading strategy (default: 'lazy')
+    widths?: number[]                     # Srcset widths, passed to Image
+    sizes?: string                        # CSS sizes attribute, passed to Image
     classes?: string                      # Additional classes for figure
 
   Examples:
@@ -21,6 +24,8 @@
       src={photo}
       alt="Canyon landscape"
       caption="Grand Staircase-Escalante, Utah"
+      loading="eager"
+      sizes="(max-width: 767px) 100vw, 50vw"
       classes="my-8"
     />
 */
@@ -33,6 +38,9 @@ interface Props {
   src: ImageMetadata | string;
   alt: string;
   caption?: string;
+  loading?: 'lazy' | 'eager';
+  widths?: number[];
+  sizes?: string;
   classes?: string;
 }
 
@@ -40,11 +48,14 @@ const {
   src,
   alt,
   caption,
+  loading = 'lazy',
+  widths,
+  sizes,
   classes = '',
 } = Astro.props;
 ---
 
 <figure class={`c-figure${classes ? ` ${classes}` : ''}`}>
-  <Image src={src} alt={alt} />
+  <Image src={src} alt={alt} loading={loading} widths={widths} sizes={sizes} />
   {caption && <figcaption class="c-figure__caption">{caption}</figcaption>}
 </figure>

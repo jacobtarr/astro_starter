@@ -27,8 +27,12 @@ export default config({
           collection: 'categories',
         }),
         readTime: fields.text({ label: 'Read time' }),
-        image: fields.text({ label: 'Image URL' }),
-        imageAlt: fields.text({ label: 'Image alt text' }),
+        thumbnail: fields.image({
+          label: 'Thumbnail Image',
+          directory: 'src/content/blog',
+          publicPath: '../',
+        }),
+        thumbnailAlt: fields.text({ label: 'Thumbnail Image alt text' }),
         featured: fields.checkbox({ label: 'Featured post' }),
         draft: fields.checkbox({ label: 'Draft' }),
         content: fields.mdx({

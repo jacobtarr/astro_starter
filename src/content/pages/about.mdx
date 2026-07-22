@@ -3,12 +3,14 @@ title: About
 ---
 
 import Hero from '@blocks/hero/Hero.astro';
+import heroImage from '@assets/images/the-wave.avif';
+import coloradoImage from '@assets/images/colorado-fall.avif';
 import SplitMedia from '@blocks/splitMedia/SplitMedia.astro';
 
 <Hero
   eyebrow="About Me"
   heading="I'm a photographer and <span class='text-primary'>web developer</span>"
-  image="https://images.unsplash.com/photo-1687307608730-934c84e3c00d?q=80&w=1860&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  image={heroImage}
   imageAlt="About photo"
   primaryButtonText="View Portfolio"
   primaryButtonUrl="/"
@@ -21,7 +23,7 @@ import SplitMedia from '@blocks/splitMedia/SplitMedia.astro';
 <SplitMedia
   eyebrow="My Story"
   heading="This is an example of a headline"
-  image="https://images.unsplash.com/photo-1697044399245-2ba932fca8ef?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  image={coloradoImage}
   imageAlt="Working"
 	reverse
 >

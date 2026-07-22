@@ -8,6 +8,7 @@
     tag?: 'span' | 'a' | 'div'            # Wrapper tag (default: 'span')
     url?: string                          # URL if tag is 'a' (default: '#')
     target?: string                       # Link target (default: '_self')
+    label?: string                        # Accessible name for icon-only links (required when tag is 'a')
     classes?: string                      # Additional classes
     attrs?: Record<string, string>        # Additional HTML attributes
 
@@ -21,6 +22,7 @@
       tag="a"
       url="https://www.instagram.com/jacobtarr/"
       target="_blank"
+      label="Follow on Instagram"
       attrs={{ rel: 'noopener noreferrer' }}
     />
 
@@ -37,6 +39,7 @@ interface Props {
   tag?: 'span' | 'a' | 'div';
   url?: string;
   target?: string;
+  label?: string;
   classes?: string;
   attrs?: Record<string, string>;
 }
@@ -47,13 +50,16 @@ const {
   tag = 'span',
   url = '#',
   target = '_self',
+  label,
   classes = '',
   attrs = {},
 } = Astro.props;
 
 const className = ['c-icon', classes].filter(Boolean).join(' ');
 
-const linkAttrs = tag === 'a' ? { href: url, target } : {};
+const linkAttrs = tag === 'a' 
+  ? { href: url, target, 'aria-label': label } 
+  : {};
 
 const resolvedPath = iconPath
   ? `./src/assets/icons/${iconPath}`

@@ -2,6 +2,6 @@
 
 @layer components {
   .c-post-meta {
-    @apply text-sm text-gray-400;
+    @apply text-sm text-gray-500;
   }
 }

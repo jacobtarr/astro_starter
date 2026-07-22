@@ -57,8 +57,26 @@ const {
 <div class="p-blog-card">
   {image && (
     href
-      ? <a href={href} class="p-blog-card__image"><Image src={image} alt={imageAlt} /></a>
-      : <div class="p-blog-card__image"><Image src={image} alt={imageAlt} /></div>
+      ? (
+        <a href={href} class="p-blog-card__image">
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[300, 600, 900]}
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
+          />
+        </a>
+      )
+      : (
+        <div class="p-blog-card__image">
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[300, 600, 900]}
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
+          />
+        </div>
+      )
   )}
   <div class="p-blog-card__content space-y-8">
     <div class="space-y-2">

@@ -19,7 +19,7 @@
     color: var(--prose-color);
 
     p {
-      @apply mb-4 last:mb-0;
+      @apply leading-prose mb-4 last:mb-0;
 
       &:empty {
         display: none;

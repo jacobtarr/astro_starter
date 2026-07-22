@@ -27,26 +27,21 @@ const year = new Date().getFullYear();
         <div class="sm:space-y-12">
           <div class="space-y-4">
             <Logo classes="c-logo--footer" />
-            <RichText
-              content="<p>Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.</p>"
-              theme="dark"
-            />
+            <p>Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.</p>
           </div>
           <div class="hidden sm:block space-y-4">
             <Eyebrow text="Follow Me on Social Media" theme="dark" />
             <IconGroup
 							classes=""
 							icons={socialLinks.map(link => ({
-								name: link.name,
-								tag: 'a',
-								url: link.url,
-								target: '_blank',
-								classes: 'w-8 h-8 text-gray-900',
-								attrs: {
-                  'aria-label': link.name.charAt(0).toUpperCase() + link.name.slice(1) + ' icon',
-                  rel: 'noopener noreferrer'
-                }
-							}))}
+                name: link.name,
+                tag: 'a',
+                url: link.url,
+                target: '_blank',
+                label: link.label,
+                classes: 'w-8 h-8 text-gray-800',
+                attrs: { rel: 'noopener noreferrer' }
+              }))}
             />
           </div>
         </div>
@@ -71,11 +66,9 @@ const year = new Date().getFullYear();
             tag: 'a',
             url: link.url,
             target: '_blank',
+            label: link.label,
             classes: 'w-8 h-8 text-gray-800',
-            attrs: {
-              'aria-label': link.name.charAt(0).toUpperCase() + link.name.slice(1) + ' icon',
-              rel: 'noopener noreferrer'
-            }
+            attrs: { rel: 'noopener noreferrer' }
           }))}
         />
       </div>
@@ -83,10 +76,7 @@ const year = new Date().getFullYear();
       <div class="col-span-2 sm:col-span-3">
         <div class="space-y-4">
           <Eyebrow text="Subscribe to the Newsletter" theme="dark" />
-          <RichText
-            content="<p>Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.</p>"
-            theme="dark"
-          />
+          <p>Lorem ipsum dolor sit amet consectetur. Laoreet at euismod phasellus suspendisse fames facilisis ultrices.</p>
         </div>
       </div>
 

@@ -84,10 +84,24 @@ const imageClass = 'col-span-2 md:col-span-6';
       {image && (
         href ? (
           <a href={href} class="b-featured-post__image">
-            <Figure src={image} alt={imageAlt} caption={imageCaption} />
+            <Figure
+              src={image}
+              alt={imageAlt}
+              caption={imageCaption}
+              loading="eager"
+              widths={[400, 800, 1200]}
+              sizes="(max-width: 767px) 100vw, 50vw"
+            />
           </a>
         ) : (
-          <Figure src={image} alt={imageAlt} caption={imageCaption} />
+          <Figure
+            src={image}
+            alt={imageAlt}
+            caption={imageCaption}
+            loading="eager"
+            widths={[400, 800, 1200]}
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
         )
       )}
     </div>

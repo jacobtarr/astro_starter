@@ -3,7 +3,7 @@
   Image Component
 
   Wraps Astro's built-in Image component with sensible defaults.
-  Handles WebP conversion, srcset, and lazy loading automatically.
+  Handles srcset, lazy loading, and compression automatically.
   Supports art direction via optional mobileSrc prop.
 
   Props:
@@ -13,6 +13,7 @@
     widths?: number[]                     # Srcset widths (default: [400, 800, 1200])
     sizes?: string                        # CSS sizes attribute (default: '(max-width: 767px) 100vw, 50vw')
     loading?: 'lazy' | 'eager'            # Loading strategy (default: 'lazy')
+    quality?: number                      # Compression quality 1-100 (default: 75)
     classes?: string                      # Additional classes
 
   Examples:
@@ -24,6 +25,7 @@
       alt="Canyon landscape"
       sizes="100vw"
       loading="eager"
+      quality={80}
     />
 */
 
@@ -38,6 +40,7 @@ interface Props {
   widths?: number[];
   sizes?: string;
   loading?: 'lazy' | 'eager';
+  quality?: number;
   classes?: string;
 }
 
@@ -48,18 +51,21 @@ const {
   widths = [400, 800, 1200],
   sizes = '(max-width: 767px) 100vw, 50vw',
   loading = 'lazy',
+  quality = 75,
   classes = '',
 } = Astro.props;
+
+const fetchpriority = loading === 'eager' ? 'high' : 'auto';
 
 const className = `c-image${classes ? ` ${classes}` : ''}`;
 
 // Only use getImage when art direction is needed
 const mobileImg = mobileSrc && typeof mobileSrc !== 'string'
-  ? await getImage({ src: mobileSrc, format: 'webp', width: 800 })
+  ? await getImage({ src: mobileSrc, width: 800, quality })
   : null;
 
 const desktopImg = mobileSrc && typeof src !== 'string'
-  ? await getImage({ src, format: 'webp', width: 1600 })
+  ? await getImage({ src, width: 1600, quality })
   : null;
 ---
 
@@ -67,10 +73,10 @@ const desktopImg = mobileSrc && typeof src !== 'string'
   <picture>
     <source media="(max-width: 767px)" srcset={mobileImg.src} />
     <source media="(min-width: 768px)" srcset={desktopImg.src} />
-    <img src={desktopImg.src} alt={alt} loading={loading} class={className} />
+    <img src={desktopImg.src} alt={alt} loading={loading} fetchpriority={fetchpriority} class={className} />
   </picture>
 ) : typeof src === 'string' ? (
-  <img src={src} alt={alt} loading={loading} class={className} />
+  <img src={src} alt={alt} loading={loading} fetchpriority={fetchpriority} class={className} />
 ) : (
   <AstroImage
     src={src}
@@ -78,7 +84,8 @@ const desktopImg = mobileSrc && typeof src !== 'string'
     widths={widths}
     sizes={sizes}
     loading={loading}
-    format="webp"
+    fetchpriority={fetchpriority}
+    quality={quality}
     class={className}
   />
 )}

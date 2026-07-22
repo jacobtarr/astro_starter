@@ -1,10 +1,6 @@
 ---
 import Page from '@layouts/Page.astro';
 import RichText from '@components/rich-text/RichText.astro';
-import Badge from '@components/badge/Badge.astro';
-import Breadcrumb from '@components/breadcrumb/Breadcrumb.astro';
-import Heading from '@components/heading/Heading.astro';
-import Eyebrow from '@components/eyebrow/Eyebrow.astro';
 import TableOfContents from '@components/table-of-contents/TableOfContents.astro';
 import IconGroup from '@patterns/icon-group/IconGroup.astro';
 import PostHeader from '@patterns/post-header/PostHeader.astro';
@@ -35,16 +31,16 @@ const relatedPosts = allPosts
   .slice(0, 3);
 
 const shareLinks = [
-  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.data.title)}` },
-  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+  { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.data.title)}`, label: 'Share on Twitter' },
+  { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, label: 'Share on Facebook' },
 ];
 ---
 
 <Page>
   <PostHeader
     title={post.data.title}
-    image={post.data.image}
-    imageAlt={post.data.imageAlt}
+    image={post.data.thumbnail}
+    imageAlt={post.data.thumbnailAlt}
     excerpt={post.data.excerpt}
     category={post.data.category}
     categoryHref={post.data.category ? `/blog/category/${post.data.category.toLowerCase()}` : undefined}
@@ -69,6 +65,7 @@ const shareLinks = [
               tag: 'a',
               url: link.url,
               target: '_blank',
+              label: link.label,
               classes: 'bg-gray-200 text-gray-900 h-8 w-8',
               attrs: { rel: 'noopener noreferrer' }
             }))}

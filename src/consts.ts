@@ -13,6 +13,6 @@ export const navLinks = [
 ];
 
 export const socialLinks = [
-  { name: 'instagram', url: 'https://www.instagram.com/jacobtarr/' },
-  { name: 'facebook',  url: 'https://facebook.com' },
+  { name: 'instagram', url: 'https://www.instagram.com/jacobtarr/', label: 'Follow on Instagram' },
+  { name: 'facebook',  url: 'https://facebook.com', label: 'Follow on Facebook' },
 ];
