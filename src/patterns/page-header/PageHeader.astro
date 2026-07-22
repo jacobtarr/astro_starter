@@ -8,7 +8,7 @@
   Props:
     heading: string                       # Main heading (required)
     description?: string                  # Optional description text
-    image?: string                        # Background image URL
+    image?: ImageMetadata | string        # Background image
     imageAlt?: string                     # Image alt text (default: '')
 
   Examples:
@@ -24,6 +24,7 @@ import './page-header.css';
 import Heading from '@components/heading/Heading.astro';
 import RichText from '@components/rich-text/RichText.astro';
 import Image from '@components/image/Image.astro';
+import type { ImageMetadata } from 'astro';
 import { capitalize } from '@src/utils/helpers';
 
 interface Props {
@@ -41,12 +42,12 @@ const {
 } = Astro.props;
 ---
 
-<div class="c-page-header relative h-[350px] md:h-[400px] overflow-hidden">
+<div class="c-page-header">
   {image && (
-    <Image src={image} alt={imageAlt} classes="absolute inset-0 w-full h-full object-cover" />
+    <Image src={image} alt={imageAlt} classes="c-page-header__image" />
   )}
-  <div class="c-page-header__content absolute z-10 inset-0 container mx-auto flex justify-center items-end md:justify-start md:items-center">
-    <div class="space-y-4 md:space-y-6 md:max-w-[400px] px-6 md:px-0 pb-12 md:pb-0">
+  <div class="c-page-header__content container mx-auto">
+    <div class="c-page-header__inner space-y-4 md:space-y-6 ">
       <Heading theme="dark" text={capitalize(heading)} tag="h1" size="h2" />
       {description && (
         <RichText theme="dark" variant="large" content={`<p>${description}</p>`} />

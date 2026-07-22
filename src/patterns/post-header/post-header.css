@@ -1,0 +1,23 @@
+@reference "@styles/index.css";
+
+@layer components {
+  .p-post-header {
+    @apply relative flex flex-wrap md:flex-nowrap items-stretch min-h-[500px] bg-gray-100;
+  }
+
+  .p-post-header__image {
+    @apply w-full lg:w-1/2 aspect-video lg:aspect-auto;
+  }
+
+  .p-post-header__content-wrapper {
+    @apply w-full -order-1 md:order-1 lg:w-full lg:absolute lg:inset-0 flex items-center;
+  }
+
+  .p-post-header__content {
+    @apply lg:w-1/2 ml-auto py-12 px-5 md:px-12 lg:py-16 lg:pl-16 lg:pr-0;
+  }
+
+  .p-post-header__share {
+    @apply flex items-center gap-3;
+  }
+}

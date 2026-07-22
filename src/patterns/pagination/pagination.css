@@ -1,5 +1,41 @@
 @reference "@styles/index.css";
 
 @layer components {
+  .p-pagination {
+    @apply h-12 flex items-center justify-between
+		border-t border-gray-200;
+  }
 
+  .p-pagination__prev,
+  .p-pagination__next {
+    @apply flex-1 flex h-12 -mt-px;
+  }
+
+  .p-pagination__next {
+    @apply justify-end;
+  }
+
+  .p-pagination__link {
+		@apply leading-none pt-4 border-t-2 border-transparent text-primary hover:border-primary;
+
+		&.is-disabled {
+			@apply pointer-events-none text-gray-500 border-transparent;
+		}
+	}
+
+  .p-pagination__pages {
+    @apply hidden md:flex gap-1 h-12 -mt-px;
+  }
+
+  .p-pagination__ellipsis {
+    @apply pt-4 text-gray-500 h-full;
+  }
+
+  .p-pagination__page {
+    @apply flex items-baseline pt-[17px] px-4 border-t-2 h-full border-transparent text-gray-600 hover:border-primary hover:text-primary;
+
+    &.is-current {
+      @apply border-primary text-primary;
+    }
+  }
 }

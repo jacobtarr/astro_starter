@@ -40,31 +40,25 @@ if (totalPages <= 7) {
 }
 ---
 
-<nav class="p-pagination h-12 border-t border-gray-200 flex items-center justify-between" aria-label="Pagination">
-	<div class="flex-1 flex h-12 -mt-px">
-		<Link
-			text="Prev"
-			url={currentPage > 1 ? getPageUrl(currentPage - 1) : '#'}
-			icon="arrow-left"
-			iconOrientation="left"
-			classes={`leading-none pt-4 border-t-2 border-transparent hover:border-primary${currentPage === 1 ? ' pointer-events-none opacity-40' : ''}`}
-		/>
-	</div>
-  
+<nav class="p-pagination" aria-label="Pagination">
+  <div class="p-pagination__prev">
+    <Link
+      text="Prev"
+      url={currentPage > 1 ? getPageUrl(currentPage - 1) : '#'}
+      icon="arrow-left"
+      iconOrientation="left"
+      classes={`p-pagination__link${currentPage === 1 ? ' is-disabled' : ''}`}
+    />
+  </div>
 
-  <div class="hidden md:flex gap-1 h-12 -mt-px">
+  <div class="p-pagination__pages">
     {pages.map(page => (
       page === '...' ? (
-        <span class="p-pagination__ellipsis pt-4 text-gray-500 h-full">…</span>
+        <span class="p-pagination__ellipsis">…</span>
       ) : (
         <a
           href={getPageUrl(page)}
-          class:list={[
-            'p-pagination__page flex items-baseline pt-[17px] px-4 border-t-2 h-full',
-						page === currentPage
-							? 'border-primary text-primary'
-							: 'border-transparent text-gray-600 hover:border-primary hover:text-primary'
-          ]}
+          class:list={['p-pagination__page', { 'is-current': page === currentPage }]}
           aria-current={page === currentPage ? 'page' : undefined}
         >
           {page}
@@ -73,13 +67,12 @@ if (totalPages <= 7) {
     ))}
   </div>
 
-	<div class="flex-1 flex justify-end h-12 -mt-px">
-		<Link
-			text="Next"
-			url={currentPage < totalPages ? getPageUrl(currentPage + 1) : '#'}
-			icon="arrow-right"
-			classes={`leading-none  pt-4 border-t-2 border-transparent hover:border-primary${currentPage === totalPages ? 'pt-4 pointer-events-none' : ''}`}
-		/>
-	</div>
-  
+  <div class="p-pagination__next">
+    <Link
+      text="Next"
+      url={currentPage < totalPages ? getPageUrl(currentPage + 1) : '#'}
+      icon="arrow-right"
+      classes={`p-pagination__link${currentPage === totalPages ? ' is-disabled' : ''}`}
+    />
+  </div>
 </nav>

@@ -38,6 +38,6 @@ body {
   }
 
   a {
-    @apply hover:text-blue-500 transition-colors;
+    @apply hover:text-blue-700 transition-colors;
   }
 }
