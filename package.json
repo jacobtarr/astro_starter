@@ -9,7 +9,8 @@
     "dev": "astro dev stop && astro dev",
     "build": "astro build",
     "preview": "netlify serve",
-    "astro": "astro"
+    "astro": "astro",
+    "check-docs": "node scripts/check-docs.mjs"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^1.0.0",
@@ -34,7 +35,9 @@
     "vite-plugin-restart": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^26.1.0"
+    "@types/node": "^26.1.0",
+    "glob": "^13.0.6",
+    "typescript": "^5.9.3"
   },
   "optionalDependencies": {
     "@rollup/rollup-darwin-arm64": "^4.62.2"

@@ -5,14 +5,15 @@
   A labeled form input or textarea.
 
   Props:
-    type?: 'text' | 'email' | 'tel' | 'textarea'   # Field type (default: 'text')
-    id: string                                     # Field id, used for label association (required)
-    name: string                                   # Field name (required)
-    label: string                                  # Label text (required)
-    autocomplete?: string                          # Autocomplete attribute
-    rows?: number                                  # Rows for textarea (default: 4)
-    required?: boolean                             # Required field (default: false)
-    classes?: string                               # Additional classes for wrapper
+    type?: 'text' | 'email' | 'tel' | 'textarea'    # Field type (default: 'text')
+    id: string                                      # Field id, used for label association (required)
+    name: string                                    # Field name (required)
+    label: string                                   # Label text (required)
+    autocomplete?: string                           # Autocomplete attribute
+    rows?: number                                   # Rows for textarea (default: 4)
+    required?: boolean                              # Required field (default: false)
+    hideLabel?: boolean                             # Option to hide label (default: false)
+    classes?: string                                # Additional classes for wrapper
 
   Examples:
     <FormField id="first-name" name="first-name" label="First name" autocomplete="given-name" />

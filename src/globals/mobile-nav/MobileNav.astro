@@ -6,8 +6,8 @@
   Uses Alpine.js for open/close state via parent header x-data.
 
   Props:
-    links: { href: string, label: string }[]  # Nav links (required)
-    socialLinks?: { name: string, url: string }[]  # Social icon links
+    links: NavLink[]              # Nav links (required)
+    socialLinks?: SocialLink[]    # Social icon links
 
   Examples:
     <MobileNav links={navLinks} />

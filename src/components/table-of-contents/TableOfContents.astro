@@ -5,8 +5,8 @@
   Sticky sidebar with scroll progress bar and active heading tracking.
 
   Props:
-    headings: { depth: number; slug: string; text: string }[]  # Headings from render() (required)
-		classes?: string                                           # Additional classes
+    headings: Heading[]    # Headings from render() (required)
+    classes?: string       # Additional classes
 
   Examples:
     const { Content, headings } = await render(post);
