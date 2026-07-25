@@ -7,7 +7,9 @@ A barebones, deliberately architected Astro starter with a component/pattern/blo
 
 ## Philosophy
 
-This isn't a typical Astro theme — it's an opinionated barebones starter built around a deliberate architectural philosophy. Every decision has a reason behind it, documented directly in the code as comments. For the reasoning behind the bigger structural choices, see [ARCHITECTURE.md](./ARCHITECTURE.md).
+This isn't a typical Astro theme — it's an opinionated barebones starter built around a deliberate architectural philosophy. Every decision has a reason behind it, documented directly in the code as comments.
+
+<!-- For the reasoning behind the bigger structural choices, see [ARCHITECTURE.md](./ARCHITECTURE.md). -->
 
 ## Quick Start
 
@@ -129,10 +131,10 @@ Node). Don't need a form? Remove `src/actions/` and
 | `npm run check-docs` | Verify component docblocks match their prop interfaces |
 | `npm run check-docs -- --fix` | Auto-fix missing/misaligned docs |
 
-## Performance
+<!-- ## Performance
 
 Built and tuned to a 100 Lighthouse performance score. See
-[PERFORMANCE.md](./PERFORMANCE.md) for the optimization notes.
+[PERFORMANCE.md](./PERFORMANCE.md) for the optimization notes. -->
 
 ## Deployment
 
