@@ -40,7 +40,7 @@ const { page, totalPages, posts, categories, featured } = Astro.props;
 
 ---
 
-<Page>
+<Page title={`Blog - Page ${page}`}>
 	{featured && (
     <FeaturedPost
       eyebrow="Featured Post"

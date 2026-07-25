@@ -4,6 +4,7 @@ import BlogCard from '@patterns/blog-card/BlogCard.astro';
 import CategoryTabs from '@components/category-tabs/CategoryTabs.astro';
 import PageHeader from '@patterns/page-header/PageHeader.astro';
 import Button from '@components/button/Button.astro';
+import { capitalize } from '@src/utils/helpers';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -28,7 +29,7 @@ const sorted = posts.sort((a, b) =>
 const POSTS_PER_PAGE = 8;
 ---
 
-<Page>
+<Page title={capitalize(category)} description={`Browse all posts in ${capitalize(category)}.`}>
   <PageHeader
     heading={category}
     description="Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."

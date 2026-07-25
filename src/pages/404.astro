@@ -1,0 +1,22 @@
+---
+import Page from '@layouts/Page.astro';
+import Heading from '@components/heading/Heading.astro';
+import Button from '@components/button/Button.astro';
+import RichText from '@components/rich-text/RichText.astro';
+---
+
+<Page title="Page not found" useContainer>
+  <div class="max-w-3xl mx-auto text-center py-12 md:py-40">
+    <div class="space-y-6">
+      <Heading text="Page not found" tag="h1" />
+      <RichText
+        variant="large"
+        content="<p>The page you're looking for doesn't exist or has moved.</p>"
+      />
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button text="Back home" url="/" variant="primary" />
+        <Button text="Browse the blog" url="/blog" variant="secondary" />
+      </div>
+    </div>
+  </div>
+</Page>

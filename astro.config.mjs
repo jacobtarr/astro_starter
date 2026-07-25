@@ -14,6 +14,8 @@ import markdoc from '@astrojs/markdoc';
 
 import netlify from '@astrojs/netlify';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -39,13 +41,14 @@ export default defineConfig({
       },
     },
   },
-
+  site: 'https://jaketarrdev-astro-starter.netlify.app/',
   integrations: [
     alpinejs({ entrypoint: '/src/scripts/alpine' }),
     mdx(),
     keystatic(),
     react(),
     markdoc(),
+    sitemap(),
   ],
 
   adapter: netlify(),

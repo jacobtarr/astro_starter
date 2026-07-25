@@ -13,6 +13,8 @@ if (!home) {
 const { Content } = await render(home);
 ---
 
-<Page>
+<Page
+  description={home.data.seoDescription}
+>
   <Content />  
 </Page>

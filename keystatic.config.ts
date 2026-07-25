@@ -22,6 +22,8 @@ export default config({
         title: fields.slug({ name: { label: 'Title' } }),
         date: fields.date({ label: 'Date' }),
         excerpt: fields.text({ label: 'Excerpt', multiline: true }),
+        seoTitle: fields.text({ label: 'SEO title (optional)', description: 'Overrides the page title for search engines and social sharing' }),
+        seoDescription: fields.text({ label: 'SEO description (optional)', multiline: true }),
         category: fields.relationship({
           label: 'Category',
           collection: 'categories',

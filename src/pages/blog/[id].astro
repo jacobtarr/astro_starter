@@ -34,9 +34,31 @@ const shareLinks = [
   { name: 'twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.data.title)}`, label: 'Share on Twitter' },
   { name: 'facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, label: 'Share on Facebook' },
 ];
+
+const postImage = typeof post.data.thumbnail === 'string'
+  ? post.data.thumbnail
+  : post.data.thumbnail?.src;
+
+// Structured data helps search engines understand this page is a blog
+// post and can enable rich results (author, publish date) in search.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  datePublished: post.data.date,
+  image: postImage,
+  mainEntityOfPage: shareUrl,
+};
 ---
 
-<Page>
+<Page
+  title={post.data.seoTitle ?? post.data.title}
+  description={post.data.seoDescription ?? post.data.excerpt}
+  ogImage={postImage}
+  ogType="article"
+  jsonLd={jsonLd}
+>
   <PostHeader
     title={post.data.title}
     image={post.data.thumbnail}

@@ -6,6 +6,11 @@
   Handles page wrapper and optional container.
 
   Props:
+    title?: string                    # Page title (default: site title)
+    description?: string              # Meta description (default: site description)
+    ogImage?: string                  # Open Graph / Twitter card image URL
+    ogType?: 'website' | 'article'    # Open Graph type (default: 'website')
+    jsonLd?: Record<string, unknown>  # Structured data object, rendered as JSON-LD
     useContainer?: boolean            # Wrap content in container (default: false)
     containerClasses?: string         # Additional classes for .l-page-container
 
@@ -24,6 +29,11 @@ import Header from '@globals/header/Header.astro';
 import Footer from '@globals/footer/Footer.astro';
 
 interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>;
   useContainer?: boolean;
   containerClasses?: string;
 }
@@ -33,6 +43,11 @@ const bodyClass = `l-body-${slug}`;
 const pageClass = `l-page-container l-page-${slug}`;
 
 const {
+  title,
+  description,
+  ogImage,
+  ogType,
+  jsonLd,
   useContainer = false,
   containerClasses = '',
 } = Astro.props;
@@ -40,7 +55,14 @@ const {
 const containerClassName = ['l-page-container__inner container mx-auto', containerClasses].filter(Boolean).join(' ');
 ---
 
-<Base bodyClass={bodyClass}>
+<Base
+  bodyClass={bodyClass}
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType={ogType}
+  jsonLd={jsonLd}
+>
   <Header />
   <main class="l-site-container">
     <div class={pageClass}>

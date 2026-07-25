@@ -35,7 +35,7 @@ const totalPages = Math.ceil(rest.length / POSTS_PER_PAGE);
 const paginatedPosts = rest.slice(0, POSTS_PER_PAGE);
 ---
 
-<Page>
+<Page title="Blog" description="Read the latest posts.">
   {featured && (
     <FeaturedPost
       eyebrow="Featured Post"

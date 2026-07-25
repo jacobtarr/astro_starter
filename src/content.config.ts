@@ -5,6 +5,8 @@ const pages = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
   }),
 });
 
@@ -19,6 +21,8 @@ const blog = defineCollection({
     title: z.string(),
     date: z.coerce.string(),
     excerpt: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
     readTime: z.string().optional(),
     thumbnail: image().optional(),
     thumbnailAlt: z.string().default(''),

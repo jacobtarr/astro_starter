@@ -11,6 +11,9 @@ if (!about) {
 const { Content } = await render(about);
 ---
 
-<Page>
+<Page
+  title={about.data.seoTitle ?? about.data.title}
+  description={about.data.seoDescription}
+>
   <Content />
 </Page>
