@@ -95,8 +95,8 @@ on the same token system instead of introducing its own spacing scale.
   override via optional `seoTitle`/`seoDescription` frontmatter fields
 - Blog posts get `og:type="article"` and `BlogPosting` JSON-LD structured
   data automatically
-- `robots.txt` and `sitemap-index.xml` generated at build time via
-  `@astrojs/sitemap`
+- [`robots.txt`](./src/pages/robots.txt.js) and `sitemap-index.xml`
+  generated at build time via `@astrojs/sitemap`
 - RSS feed at [`/rss.xml`](./src/pages/rss.xml.js) via `@astrojs/rss`
 - Custom [`404.astro`](./src/pages/404.astro)
 
