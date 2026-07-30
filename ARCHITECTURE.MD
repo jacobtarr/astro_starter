@@ -43,7 +43,7 @@ src/
 Notice every component, pattern, and block follows the same shape: an `.astro` file paired with its own `.css` file, colocated in a folder named after the component. This is the same colocation philosophy from the introduction, applied consistently at every level of the hierarchy.
 
 ### Layouts & Globals
-Two folders site outside this hierarchy which we haven't talked about yet: layouts and globals. Layouts hold `Base.astro` and `Page.astro`, the actual HTML document shell and the page wrapper every route renders inside. Globals hold one-off pieces: `<Header>`, `<Footer>` and `<Head>`. There's only ever one header, so it doesn't need to be a reusable pattern the way a card does.
+Two folders sit outside this hierarchy which we haven't talked about yet: layouts and globals. Layouts hold `Base.astro` and `Page.astro`, the actual HTML document shell and the page wrapper every route renders inside. Globals hold one-off pieces: `<Header>`, `<Footer>` and `<Head>`. There's only ever one header, so it doesn't need to be a reusable pattern the way a card does.
 
 ## Colocated CSS
 Every component, pattern, block and sometimes even a global pairs its `.astro` file with its own stylesheet, imported directly at the top of the frontmatter. Open `Button.astro`, its styles are one line away in `button.css`. Delete a component, its styles go with it. This solves the exact problem from the introduction. It eliminates hunting through a global stylesheet and keeps the system organized as it grows.
