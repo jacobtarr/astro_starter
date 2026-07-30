@@ -14,7 +14,7 @@ A barebones, deliberately architected Astro starter with a component/pattern/blo
 
 ## Philosophy
 
-This isn't a typical Astro theme — it's an opinionated barebones starter built around a deliberate architectural philosophy. Every decision has a reason behind it, documented directly in the code as comments. For the reasoning behind the bigger structural choices, see [ARCHITECTURE.md](./ARCHITECTURE.md).
+This isn't a typical Astro theme — it's an opinionated barebones starter built around a deliberate architectural philosophy. Every decision has a reason behind it, documented directly in the code as comments. For the reasoning behind the bigger structural choices, see [ARCHITECTURE.md](./ARCHITECTURE.MD).
 
 ## Quick Start
 
@@ -140,7 +140,7 @@ Node). Don't need a form? Remove `src/actions/` and
 ## Performance
 
 Built and tuned to a 100 Lighthouse performance score. See the
-[Image Performance section](./ARCHITECTURE.md#image-performance) of
+[Image Performance section](./ARCHITECTURE.MD#image-performance) of
 ARCHITECTURE.md for the optimization notes.
 
 ## Deployment
