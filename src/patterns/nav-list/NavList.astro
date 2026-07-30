@@ -50,7 +50,7 @@ const baseLinkClass = ['p-nav-list__link', linkClasses].filter(Boolean).join(' '
 const isActive = (href: string) => Astro.url.pathname === href;
 ---
 
-<ul class={ulClass}>
+<ul class={ulClass} data-show-active={showActive}>
   {links.map((link) => {
     const linkClass = [baseLinkClass, link.classes].filter(Boolean).join(' ');
     return (
@@ -69,7 +69,7 @@ const isActive = (href: string) => Astro.url.pathname === href;
 
 <script>
   function setActiveLink() {
-    document.querySelectorAll('.p-nav-list__link').forEach(link => {
+    document.querySelectorAll('.p-nav-list[data-show-active="true"] .p-nav-list__link').forEach(link => {
       const href = link.getAttribute('href');
       if (href === window.location.pathname) {
         link.setAttribute('aria-current', 'page');

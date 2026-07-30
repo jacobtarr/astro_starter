@@ -26,3 +26,4 @@ pnpm-debug.log*
 .vscode/settings.json
 # Local Netlify folder
 .netlify
+deno.lock
