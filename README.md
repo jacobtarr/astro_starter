@@ -12,6 +12,20 @@
 
 A barebones, deliberately architected Astro starter with a component/pattern/block/global hierarchy modeled on CMS conventions, colocated CSS, MDX-driven page building, and optional Keystatic CMS integration.
 
+## Contents
+- [Philosophy](#philosophy)
+- [Quick Start](#quick-start)
+- [Stack](#stack)
+- [Project Structure](#project-structure)
+- [Content Authoring](#content-authoring)
+- [SEO](#seo)
+- [Optional: Removing Keystatic](#optional-removing-keystatic)
+- [Optional: Contact Form](#optional-contact-form)
+- [Commands](#commands)
+- [Performance](#performance)
+- [Deployment](#deployment)
+- [License](#license)
+
 ## Philosophy
 
 This isn't a typical Astro theme — it's an opinionated barebones starter built around a deliberate architectural philosophy. Every decision has a reason behind it, documented directly in the code as comments. For the reasoning behind the bigger structural choices, see [ARCHITECTURE.md](./ARCHITECTURE.MD).

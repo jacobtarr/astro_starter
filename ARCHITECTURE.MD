@@ -110,7 +110,7 @@ thumbnail: fields.image({
 For this particular setup, images that aren't tied to a specific post, like the homepage hero or the site logo, live in `src/assets/` instead and get imported directly in MDX.
 
 ### Performance
-The `Image` component wraps Astro's built-in image handling with a few additions that came directly from reading actual Lighthouse reports, not from guessing at best practices upfront.
+The `Image` component wraps Astro's built-in image handling with a few additions, all found by reading actual Lighthouse reports and fixing what they flagged.
 
 `fetchpriority="high"` is applied automatically whenever `loading="eager"` is set, so above-the-fold images like a hero or a featured post are correctly prioritized as the page's Largest Contentful Paint (LCP) candidate.
 
